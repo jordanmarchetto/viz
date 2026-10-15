@@ -157,6 +157,18 @@ The [LLM integration guide](docs/agent-integration.md) provides a complete
 instruction block you can copy into an agent or skill, plus examples for
 detached reports and blocking decision pages.
 
+## Security
+
+Only run page descriptions from sources you trust. A `ref` block can read any
+file available to the `viz` process or run a program from its command allowlist.
+If remote mode is configured, the resulting page—including referenced
+content—is uploaded to that server.
+
+Do not place credentials or other secrets in a page. Review generated `ref`
+commands before running JSON from an untrusted person, repository, or model.
+See the [`ref` block documentation](docs/page-format.md#ref) for the default
+allowlist and its limits.
+
 ## Documentation
 
 - [Page format](docs/page-format.md): All block types and their fields.

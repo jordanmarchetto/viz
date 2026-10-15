@@ -34,6 +34,12 @@ collapsed sections, and unified diffs receive syntax coloring.
 
 Provide `cmd` or `file`, but not both.
 
+Only use `ref` blocks from sources you trust. A `file` reference can read any
+file available to the `viz` process, including paths outside the current
+repository. A `cmd` reference runs a local program. When remote mode is active,
+the resolved content is included in the page uploaded to the configured server.
+The allowlist reduces accidental command execution; it is not a sandbox.
+
 `cmd` runs one program without a shell. Pipes, redirects, and `&&` are rejected.
 The program must be on this allowlist:
 

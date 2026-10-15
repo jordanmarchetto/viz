@@ -10,16 +10,21 @@ Run the interactive configuration command:
 
 ```bash
 viz config remote
-# Server URL: http://server.home:5008
+# Server URL: https://viz.example.com
 # Shared token: [input is hidden]
 ```
 
-This writes `~/.config/viz/config.json` with mode `0600`:
+This writes `~/.config/viz/config.json` with mode `0600`.
+
+Use HTTPS for any server reached over a network. Plain HTTP sends both the
+bearer token and rendered page content without encryption. Use an HTTP URL only
+for a loopback address such as `127.0.0.1`, typically when an SSH tunnel carries
+the connection securely.
 
 ```json
 {
   "remote": {
-    "serverUrl": "http://server.home:5008",
+    "serverUrl": "https://viz.example.com",
     "token": "shared-secret"
   }
 }
