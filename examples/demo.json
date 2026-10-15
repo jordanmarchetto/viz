@@ -9,7 +9,7 @@
     {
       "type": "ref",
       "label": "Diff — src/retry.ts",
-      "cmd": "gh-axi pr diff 412"
+      "cmd": "gh pr diff 412"
     },
     {
       "type": "decide",

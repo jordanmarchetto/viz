@@ -13,7 +13,7 @@ export interface MdBlock {
 
 export interface RefBlock {
 	type: "ref";
-	/** Shell command whose output to show, e.g. "gh-axi pr diff 412". */
+	/** Shell command whose output to show, e.g. "gh pr diff 412". */
 	cmd?: string;
 	/** File to show. Relative paths resolve from the working directory. */
 	file?: string;

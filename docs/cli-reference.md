@@ -5,7 +5,7 @@
 ```text
 viz test [options]                       render the built-in sample page
 viz themes                               list built-in themes
-viz config <remote|show|disable|theme>   manage configuration
+viz config <remote|show|disable|theme|allow>   manage configuration
 ```
 
 `viz test` exercises representative content, cards, a group, a Mermaid diagram,
@@ -35,6 +35,16 @@ theme's normal mode policy. The other random choices select only compatible
 themes. `--theme` overrides `VIZ_THEME`, which overrides the configured default.
 Generated pages also provide a footer selector that changes the open page
 without modifying these defaults. See [Themes](themes.md).
+
+Add machine-specific programs to the `ref` command allowlist with:
+
+```bash
+viz config allow gh-axi jira-axi confluence-axi slack-axi
+```
+
+The command adds programs to the saved list. Use `viz config allow disable` to
+remove all saved additions. `VIZ_ALLOW` adds temporary programs without changing the file.
+`viz config show` displays the combined saved and environment values.
 
 `--echo` lets a calling tool preserve terminal output without generating the
 same content twice. Reference output is not echoed because large files and diffs

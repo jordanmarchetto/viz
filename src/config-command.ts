@@ -2,11 +2,14 @@ import { createInterface } from "node:readline/promises";
 import { Writable } from "node:stream";
 import {
 	configPath,
+	disableAllowedPrograms,
 	disableRemoteConfig,
 	disableThemeConfig,
+	loadAllowedPrograms,
 	loadEffectiveRemoteConfig,
 	loadEffectiveThemeChoice,
 	redactedConfig,
+	saveAllowedPrograms,
 	saveRemoteConfig,
 	saveThemeConfig,
 } from "./config.ts";
@@ -28,13 +31,32 @@ export async function runConfigCommand(args: string[]): Promise<void> {
 		return;
 	}
 
+	if (command === "allow") {
+		const programs = args.slice(1);
+		if (programs.length === 0) {
+			throw new Error("usage: viz config allow <program...|disable>");
+		}
+		if (programs.length === 1 && programs[0] === "disable") {
+			const changed = await disableAllowedPrograms();
+			process.stdout.write(changed ? `ref allowlist removed from ${configPath()}\n` : "ref allowlist is not set\n");
+			return;
+		}
+		await saveAllowedPrograms(programs);
+		process.stdout.write(`ref allowlist saved to ${configPath()}\n`);
+		return;
+	}
+
 	if (args.length !== 1 || !["remote", "show", "disable"].includes(command ?? "")) {
-		throw new Error("usage: viz config <remote|show|disable|theme>");
+		throw new Error("usage: viz config <remote|show|disable|theme|allow>");
 	}
 
 	if (command === "show") {
-		const [remote, theme] = await Promise.all([loadEffectiveRemoteConfig(), loadEffectiveThemeChoice()]);
-		process.stdout.write(`${JSON.stringify(redactedConfig(remote, theme), null, 2)}\n`);
+		const [remote, theme, allowedPrograms] = await Promise.all([
+			loadEffectiveRemoteConfig(),
+			loadEffectiveThemeChoice(),
+			loadAllowedPrograms(),
+		]);
+		process.stdout.write(`${JSON.stringify(redactedConfig(remote, theme, allowedPrograms), null, 2)}\n`);
 		return;
 	}
 

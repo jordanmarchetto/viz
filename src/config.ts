@@ -9,7 +9,17 @@ export interface RemoteConfig {
 	token: string;
 }
 
-type ConfigFile = Record<string, unknown> & { remote?: RemoteConfig; theme?: string };
+interface RefConfig {
+	allowedPrograms?: string[];
+}
+
+type ConfigFile = Record<string, unknown> & {
+	remote?: RemoteConfig;
+	theme?: string;
+	ref?: RefConfig;
+};
+
+const PROGRAM_NAME = /^[A-Za-z0-9._+-]+$/;
 
 export function configPath(env: NodeJS.ProcessEnv = process.env): string {
 	const home = env.HOME?.trim() || homedir();
@@ -60,6 +70,38 @@ export async function disableThemeConfig(env: NodeJS.ProcessEnv = process.env): 
 	return true;
 }
 
+export async function loadAllowedPrograms(
+	env: NodeJS.ProcessEnv = process.env,
+): Promise<string[]> {
+	const config = await readConfig(env);
+	const saved = configuredAllowedPrograms(config);
+	const fromEnvironment = validateAllowedPrograms(
+		(env.VIZ_ALLOW ?? "").split(",").map((name) => name.trim()).filter(Boolean),
+	);
+	return [...new Set([...saved, ...fromEnvironment])];
+}
+
+export async function saveAllowedPrograms(
+	programs: string[],
+	env: NodeJS.ProcessEnv = process.env,
+): Promise<void> {
+	const config = await readConfig(env);
+	config.ref = {
+		allowedPrograms: validateAllowedPrograms([...configuredAllowedPrograms(config), ...programs]),
+	};
+	await writeConfig(config, env);
+}
+
+export async function disableAllowedPrograms(
+	env: NodeJS.ProcessEnv = process.env,
+): Promise<boolean> {
+	const config = await readConfig(env);
+	if (config.ref?.allowedPrograms === undefined) return false;
+	delete config.ref;
+	await writeConfig(config, env);
+	return true;
+}
+
 export async function saveRemoteConfig(
 	remote: RemoteConfig,
 	env: NodeJS.ProcessEnv = process.env,
@@ -77,11 +119,39 @@ export async function disableRemoteConfig(env: NodeJS.ProcessEnv = process.env):
 	return true;
 }
 
-export function redactedConfig(remote: RemoteConfig | null, theme: ThemeChoice): object {
+export function redactedConfig(
+	remote: RemoteConfig | null,
+	theme: ThemeChoice,
+	allowedPrograms: string[],
+): object {
 	return {
 		remote: remote ? { serverUrl: remote.serverUrl, token: "[redacted]" } : null,
 		theme,
+		ref: { allowedPrograms },
 	};
+}
+
+function configuredAllowedPrograms(config: ConfigFile): string[] {
+	const ref = config.ref as unknown;
+	if (ref !== undefined && (typeof ref !== "object" || ref === null || Array.isArray(ref))) {
+		throw new Error("ref config must be an object");
+	}
+	return validateAllowedPrograms(
+		(ref as Record<string, unknown> | undefined)?.allowedPrograms ?? [],
+	);
+}
+
+function validateAllowedPrograms(value: unknown): string[] {
+	if (!Array.isArray(value) || value.some((name) => typeof name !== "string")) {
+		throw new Error("ref.allowedPrograms must be an array of program names");
+	}
+	const programs = value.map((name) => name.trim());
+	for (const program of programs) {
+		if (!program || !PROGRAM_NAME.test(program)) {
+			throw new Error(`invalid allowed program ${JSON.stringify(program)}`);
+		}
+	}
+	return [...new Set(programs)];
 }
 
 function validateRemote(value: unknown): RemoteConfig {

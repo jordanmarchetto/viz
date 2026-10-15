@@ -19,14 +19,10 @@ import { flatten, type Block, type RefBlock } from "./schema.ts";
 
 const run = promisify(execFile);
 
-/** Binaries a ref block may invoke. Add more with VIZ_ALLOW="foo,bar". */
+/** Generic binaries a ref block may invoke without machine-local configuration. */
 const DEFAULT_ALLOWED = [
-	"gh-axi",
 	"gh",
 	"git",
-	"jira-axi",
-	"confluence-axi",
-	"slack-axi",
 	"cat",
 	"head",
 	"tail",
@@ -45,12 +41,8 @@ const MAX_BYTES = 200_000;
 const MAX_LINES = 2_000;
 const TIMEOUT_MS = 30_000;
 
-function allowed(): string[] {
-	const extra = (process.env.VIZ_ALLOW ?? "")
-		.split(",")
-		.map((name) => name.trim())
-		.filter(Boolean);
-	return [...DEFAULT_ALLOWED, ...extra];
+function allowed(additional: string[]): string[] {
+	return [...new Set([...DEFAULT_ALLOWED, ...additional])];
 }
 
 /**
@@ -81,10 +73,9 @@ function splitArgs(command: string): string[] {
 }
 
 /**
- * Undo escaping when a tool returns multi-line content as a single quoted
- * string. `gh-axi pr diff` does this: the whole diff arrives as one line with
- * literal backslash-n in it, which is compact for a model and unreadable on a
- * page.
+ * Undo escaping when a compact-output tool returns multi-line content as one
+ * quoted string with literal backslash-n characters. That format is efficient
+ * for a model and unreadable on a page.
  *
  * Only fires when the text is overwhelmingly escaped newlines rather than real
  * ones, so ordinary output containing a stray \n in a string is left alone.
@@ -118,7 +109,11 @@ function clamp(text: string): string {
 	return output + note;
 }
 
-async function resolveCmd(command: string, cwd: string): Promise<string> {
+async function resolveCmd(
+	command: string,
+	cwd: string,
+	additionalAllowed: string[],
+): Promise<string> {
 	// Strip quoted spans before scanning, so a legitimate "a|b" argument does
 	// not look like a pipe.
 	const unquoted = command.replace(/"[^"]*"|'[^']*'/g, "");
@@ -130,8 +125,9 @@ async function resolveCmd(command: string, cwd: string): Promise<string> {
 	const binary = argv[0];
 	if (!binary) return "viz: empty command";
 
-	if (!allowed().includes(binary)) {
-		return `viz: ${binary} is not on the ref allowlist\n\nAllowed: ${allowed().join(", ")}\n\nAdd more with VIZ_ALLOW="${binary}".`;
+	const allowedPrograms = allowed(additionalAllowed);
+	if (!allowedPrograms.includes(binary)) {
+		return `viz: ${binary} is not on the ref allowlist\n\nAllowed: ${allowedPrograms.join(", ")}\n\nAdd it with \`viz config allow ${binary}\` or VIZ_ALLOW="${binary}".`;
 	}
 
 	try {
@@ -160,8 +156,12 @@ async function resolveFile(file: string, cwd: string): Promise<string> {
 	}
 }
 
-async function resolveOne(block: RefBlock, cwd: string): Promise<string> {
-	if (block.cmd) return resolveCmd(block.cmd, cwd);
+async function resolveOne(
+	block: RefBlock,
+	cwd: string,
+	additionalAllowed: string[],
+): Promise<string> {
+	if (block.cmd) return resolveCmd(block.cmd, cwd, additionalAllowed);
 	if (block.file) return resolveFile(block.file, cwd);
 	return "viz: ref block has neither cmd nor file";
 }
@@ -174,10 +174,14 @@ async function resolveOne(block: RefBlock, cwd: string): Promise<string> {
  * Failures become visible text in the page rather than killing the run: a
  * broken ref should not cost you the whole page.
  */
-export async function resolveRefs(blocks: Block[], cwd: string): Promise<Map<RefBlock, string>> {
+export async function resolveRefs(
+	blocks: Block[],
+	cwd: string,
+	additionalAllowed: string[] = [],
+): Promise<Map<RefBlock, string>> {
 	const jobs = flatten(blocks).filter((block): block is RefBlock => block.type === "ref");
 
-	const results = await Promise.all(jobs.map((job) => resolveOne(job, cwd)));
+	const results = await Promise.all(jobs.map((job) => resolveOne(job, cwd, additionalAllowed)));
 
 	return new Map(jobs.map((job, i) => [job, results[i]]));
 }

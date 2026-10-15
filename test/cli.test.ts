@@ -66,6 +66,45 @@ test("config commands save, redact, and disable remote settings", async () => {
   assert.deepEqual(file, {});
 });
 
+test("configures extra ref programs and shows their effective values", async () => {
+  const directory = await temporaryDirectory();
+  const env = { HOME: directory, XDG_CONFIG_HOME: path.join(directory, "config") };
+
+  const configured = await run(["config", "allow", "gh-axi", "jira-axi"], "", env, directory);
+  assert.equal(configured.code, 0, configured.stderr);
+  assert.match(configured.stdout, /ref allowlist saved/);
+
+  const shown = await run(["config", "show"], "", { ...env, VIZ_ALLOW: "slack-axi" }, directory);
+  assert.equal(shown.code, 0, shown.stderr);
+  assert.match(shown.stdout, /"allowedPrograms": \[/);
+  assert.match(shown.stdout, /"gh-axi"/);
+  assert.match(shown.stdout, /"jira-axi"/);
+  assert.match(shown.stdout, /"slack-axi"/);
+
+  const disabled = await run(["config", "allow", "disable"], "", env, directory);
+  assert.equal(disabled.code, 0, disabled.stderr);
+  assert.match(disabled.stdout, /ref allowlist removed/);
+});
+
+test("uses configured ref programs without making them public defaults", async () => {
+  const directory = await temporaryDirectory();
+  const env = { HOME: directory, XDG_CONFIG_HOME: path.join(directory, "config") };
+  const page = JSON.stringify({
+    title: "Configured ref",
+    blocks: [{ type: "ref", cmd: "node --version" }],
+  });
+
+  const rejected = await run(["--print"], page, env, directory);
+  assert.equal(rejected.code, 0, rejected.stderr);
+  assert.match(rejected.stdout, /is not on the ref allowlist/);
+
+  const configured = await run(["config", "allow", "node"], "", env, directory);
+  assert.equal(configured.code, 0, configured.stderr);
+  const rendered = await run(["--print"], page, env, directory);
+  assert.equal(rendered.code, 0, rendered.stderr);
+  assert.match(rendered.stdout, new RegExp(process.version.replaceAll(".", "\\.")));
+});
+
 test("lists themes and applies flag, environment, and configured choices", async () => {
   const directory = await temporaryDirectory();
   const baseEnv = { HOME: directory, XDG_CONFIG_HOME: path.join(directory, "config") };

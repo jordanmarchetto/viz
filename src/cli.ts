@@ -16,7 +16,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { openInBrowser, shouldOpen } from "./open.ts";
 import { echoPage } from "./echo.ts";
-import { loadEffectiveRemoteConfig, loadEffectiveThemeChoice } from "./config.ts";
+import { loadAllowedPrograms, loadEffectiveRemoteConfig, loadEffectiveThemeChoice } from "./config.ts";
 import { runConfigCommand } from "./config-command.ts";
 import { renderPage, type Mode } from "./render.ts";
 import { resolveRefs } from "./resolve.ts";
@@ -33,7 +33,7 @@ const USAGE = `viz — render a JSON page description in the browser
 
   echo '<page json>' | viz [options]
   viz test [options]
-  viz config <remote|show|disable|theme>
+  viz config <remote|show|disable|theme|allow>
   viz themes
 
 Options
@@ -216,7 +216,7 @@ async function main(): Promise<void> {
 
 	// Resolving refs runs commands, so do it once and reuse the output for both
 	// the live page and the archive copy.
-	const refs = await resolveRefs(page.blocks, process.cwd());
+	const refs = await resolveRefs(page.blocks, process.cwd(), await loadAllowedPrograms());
 
 	if (args.print) {
 		process.stdout.write(await renderPage(page, { mode: "detached", refs, theme, artVariant }));

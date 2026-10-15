@@ -44,17 +44,23 @@ The allowlist reduces accidental command execution; it is not a sandbox.
 The program must be on this allowlist:
 
 ```text
-gh-axi gh git jira-axi confluence-axi slack-axi
-cat head tail ls rg grep find wc diff
+gh git cat head tail ls rg grep find wc diff
 ```
 
-Add programs with `VIZ_ALLOW="foo,bar"`. Output is limited to 2,000 lines or
-200 KB, and commands time out after 30 seconds. A failed reference appears as
-visible text in the page rather than stopping the run.
+Add machine-specific programs persistently with:
 
-Some tools return multiline content as one escaped string. `viz` detects and
-unpacks that format. Prefer `gh pr diff` to `gh-axi pr diff` because `gh` returns
-a raw diff.
+```bash
+viz config allow gh-axi jira-axi confluence-axi slack-axi
+```
+
+This command adds programs to the saved list. Use `viz config allow disable` to
+remove all saved additions. `VIZ_ALLOW="foo,bar"` adds programs for one
+environment without changing the config file.
+
+Output is limited to 2,000 lines or 200 KB, and commands time out after 30
+seconds. A failed reference appears as visible text in the page rather than
+stopping the run. Some tools return multiline content as one escaped string;
+`viz` detects and unpacks that format.
 
 ## `diagram`
 
