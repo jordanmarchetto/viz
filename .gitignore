@@ -5,6 +5,10 @@ scratch/
 node_modules/
 dist/
 *.tsbuildinfo
+.env*
+!.env.example
+*.pem
+*.key
 
 # Rendered pages, if ever written inside the repo
 .viz/

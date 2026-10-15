@@ -9,7 +9,9 @@ and answer collection.
 
 ## Why?
 
-Because LLMs are constantly throwing walls of text at your terminal and it can be hard to parse and is mentally draining.  Adding some visuals to the AI back and forth helps to break up the monotony. 
+LLMs often produce dense terminal output that is tiring to scan. `viz` moves
+long-form reading and decisions into a structured browser page while keeping the
+calling workflow in the terminal.
 
 ## Screenshots
 
@@ -67,8 +69,8 @@ Keep the original focused design with `classic`, or switch to the warm
 `storybook`, pastel-rainbow `unicorn`, neon `arcade`, full-spectrum `rainbow`,
 photocopied-punk `zine`, storybook `high-fantasy`, ink-and-parchment
 `adventurer-handbook`, gothic `inferno`, grim `dark-cathedral`, muddy fairy-tale
-`swamp`, or tactical `space-command` themes. Themes can follow the system, provide fixed light or dark
-appearances, or define an independent visual world:
+`swamp`, or tactical `space-command` themes. Themes can follow the system,
+provide fixed light or dark appearances, or define an independent visual world:
 
 ```bash
 viz --theme unicorn --detach --open < examples/theme-showcase.json
@@ -81,15 +83,16 @@ viz --theme inferno --detach --open < examples/theme-showcase.json
 viz --theme dark-cathedral --detach --open < examples/theme-showcase.json
 viz --theme swamp --detach --open < examples/theme-showcase.json
 viz --theme space-command --detach --open < examples/theme-showcase.json
+viz --theme random --detach --open < examples/theme-showcase.json
 viz --theme random_light --detach --open < examples/theme-showcase.json
 viz --theme random_dark --detach --open < examples/theme-showcase.json
 viz --theme random_system --detach --open < examples/theme-showcase.json
 ```
 
 <details>
-<summary>View all theme appearances</summary>
+<summary>View the original theme appearances</summary>
 
-![Light and dark appearances for four viz themes](docs/images/theme-comparison.png)
+![Light and dark appearances for Classic, Storybook, Unicorn, and Arcade](docs/images/theme-comparison.png)
 
 </details>
 
@@ -141,6 +144,14 @@ decisions provides a **Copy answers** button instead of submitting them. After
 you answer at least one decision, you can submit or copy that partial set without
 answering every block.
 
+## Use viz across machines
+
+Local mode works when `viz` and your browser run on the same computer. For SSH,
+remote development, or container workflows, the optional
+[`viz-server`](https://github.com/jordanmarchetto/viz-server) hosts finished
+pages and relays browser answers to the waiting CLI. See
+[Remote pages](docs/remote-pages.md) for setup and security guidance.
+
 ## Teach an LLM to use viz
 
 Add `viz` guidance to an agent's system prompt, repository instructions, or
@@ -162,12 +173,16 @@ detached reports and blocking decision pages.
 Only run page descriptions from sources you trust. A `ref` block can read any
 file available to the `viz` process or run a program from its command allowlist.
 If remote mode is configured, the resulting page—including referenced
-content—is uploaded to that server.
+content—is uploaded to that server. Treat a remote page URL as a private
+read/write link: anyone who knows it can view the page and submit its first
+answer.
 
 Do not place credentials or other secrets in a page. Review generated `ref`
 commands before running JSON from an untrusted person, repository, or model.
 See the [`ref` block documentation](docs/page-format.md#ref) for the default
-allowlist and its limits.
+allowlist and its limits. Report vulnerabilities through
+[GitHub private vulnerability reporting](https://github.com/jordanmarchetto/viz/security/advisories/new);
+see the [security policy](SECURITY.md).
 
 ## Documentation
 
@@ -180,3 +195,7 @@ allowlist and its limits.
 - [Remote pages](docs/remote-pages.md): Optional `viz-server` configuration and
   SSH usage.
 - [Development](docs/development.md): Project layout and local checks.
+
+## License
+
+[MIT](LICENSE)

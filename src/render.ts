@@ -254,7 +254,7 @@ ${note}
  * page offline degrades to readable text rather than an empty box.
  */
 const MERMAID_LOADER = `<script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.17.2/dist/mermaid.esm.min.mjs";
 window.VIZ_MERMAID = mermaid;
 window.dispatchEvent(new Event("viz:mermaid-ready"));
 </script>`;
