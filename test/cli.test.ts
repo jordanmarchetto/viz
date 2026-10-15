@@ -124,6 +124,8 @@ test("lists themes and applies flag, environment, and configured choices", async
   assert.match(listed.stdout, /^dark-cathedral\tindependent\t/m);
   assert.match(listed.stdout, /^swamp\tindependent\t/m);
   assert.match(listed.stdout, /^space-command\tindependent\t/m);
+  assert.match(listed.stdout, /^light-side\tsystem\t/m);
+  assert.match(listed.stdout, /^dark-side\tsystem\t/m);
 
   const configured = await run(["config", "theme", "storybook"], "", env, directory);
   assert.equal(configured.code, 0, configured.stderr);

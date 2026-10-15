@@ -21,6 +21,8 @@ decoration.
 | `dark-cathedral` | Independent | A grim reliquary of iron, bone, blood-red glass, and forbidden rites |
 | `swamp` | Independent | A muddy fairy-tale swamp of onions, crooked signs, and ogre-green cheer |
 | `space-command` | Independent | Deep-space command deck with cyan tactical readouts |
+| `light-side` | Follows the system | Hopeful temple stone, distant horizons, and luminous blue starlight |
+| `dark-side` | Follows the system | Severe command architecture, cold steel, and disciplined red light |
 | `random` | Uses the chosen theme's behavior | Chooses from every theme, including independent themes |
 | `random_light` | Light | Chooses from themes that provide a light appearance |
 | `random_dark` | Dark | Chooses from themes that provide a dark appearance |
@@ -48,6 +50,8 @@ viz --theme inferno --open < examples/theme-showcase.json
 viz --theme dark-cathedral --open < examples/theme-showcase.json
 viz --theme swamp --open < examples/theme-showcase.json
 viz --theme space-command --open < examples/theme-showcase.json
+viz --theme light-side --open < examples/theme-showcase.json
+viz --theme dark-side --open < examples/theme-showcase.json
 viz --theme random --open < examples/theme-showcase.json
 viz --theme random_light --open < examples/theme-showcase.json
 viz --theme random_dark --open < examples/theme-showcase.json
@@ -203,3 +207,15 @@ independent appearance.
 
 Use `viz --theme space-command --open < examples/theme-showcase.json` to preview
 its independent appearance.
+
+### Light Side
+
+Use `viz --theme light-side --open < examples/theme-showcase.json` to preview
+its light or dark appearance. Its four artwork arrangements pair temple stone,
+desert horizons, forest shrines, and starfighter patrols.
+
+### Dark Side
+
+Use `viz --theme dark-side --open < examples/theme-showcase.json` to preview
+its light or dark appearance. Its four artwork arrangements pair dreadnoughts,
+battle stations, throne rooms, and volcanic fortresses.

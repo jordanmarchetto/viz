@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280">
+  <defs><linearGradient id="hull" x2="0" y2="1"><stop stop-color="#d8dcdd"/><stop offset="1" stop-color="#484c50"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="6"/></filter></defs>
+  <g fill="#eee"><circle cx="55" cy="37" r="1.5"/><circle cx="169" cy="72" r="1"/><circle cx="291" cy="27" r="2"/><circle cx="471" cy="58" r="1"/><circle cx="587" cy="34" r="1.5"/></g>
+  <path d="M36 194 581 84l31 33-486 116z" fill="url(#hull)" stroke="#1d2024" stroke-width="7"/>
+  <path d="m127 200 452-98-176 96-275 35z" fill="#2b2e32"/>
+  <path d="m286 144 73-73h91l47 39z" fill="#777c80" stroke="#1d2024" stroke-width="6"/>
+  <path d="m345 83 35-47h48l22 35z" fill="#a1a6a7" stroke="#1d2024" stroke-width="6"/>
+  <g fill="#d83a32"><circle cx="390" cy="60" r="5"/><circle cx="314" cy="150" r="4"/><circle cx="465" cy="131" r="4"/></g>
+  <path d="M127 215 39 241" stroke="#ef3b32" stroke-width="4"/><path d="M127 215 39 241" stroke="#ef3b32" stroke-width="18" opacity=".22" filter="url(#g)"/>
+  <path d="m545 112 69-14" stroke="#e85a4e" stroke-width="2" stroke-dasharray="4 7"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300">
+  <defs><radialGradient id="glow"><stop stop-color="#d9fbff"/><stop offset=".35" stop-color="#6fd0e4"/><stop offset="1" stop-color="#19364b" stop-opacity="0"/></radialGradient><linearGradient id="moss" x2="0" y2="1"><stop stop-color="#52836a"/><stop offset="1" stop-color="#162e2c"/></linearGradient></defs>
+  <circle cx="325" cy="121" r="117" fill="url(#glow)"/>
+  <g fill="url(#moss)" stroke="#102223" stroke-width="5">
+    <path d="M25 282c38-56 57-113 67-215 44 50 55 121 43 215z"/><path d="M510 282c-12-93 1-172 45-242 10 112 35 181 67 242z"/>
+    <path d="M103 282c29-49 44-96 50-158 37 44 47 99 35 158z"/><path d="M448 282c-9-69 4-128 38-177 7 78 23 133 47 177z"/>
+  </g>
+  <path d="M0 257c128-42 224 2 330-13 118-17 206-36 310 5v51H0z" fill="#18342e"/>
+  <g fill="#d6cba7" stroke="#625d4c" stroke-width="4"><path d="M264 239h122l-19-115h-84z"/><path d="M247 239h156v25H247z"/><path d="m282 124 43-52 42 52z"/></g>
+  <path d="M325 91v116M296 148h58M306 181h38" stroke="#4ebcd6" stroke-width="6"/><circle cx="325" cy="91" r="9" fill="#f3dc85"/>
+</svg>

@@ -17,6 +17,8 @@ describe("themes", () => {
     assert.equal(resolveTheme("adventurer-handbook").artVariants, 6);
     assert.equal(resolveTheme("dark-cathedral").artVariants, 6);
     assert.equal(resolveTheme("swamp").artVariants, 6);
+    assert.equal(resolveTheme("light-side").artVariants, 4);
+    assert.equal(resolveTheme("dark-side").artVariants, 4);
 
     assert.deepEqual(
       [resolveTheme("random", () => 0), resolveTheme("random_system", () => 0)]
@@ -30,15 +32,15 @@ describe("themes", () => {
       [resolveTheme("random_light", () => 0.999), resolveTheme("random_dark", () => 0.999)]
         .map(({ name, colorMode, mermaidTheme }) => ({ name, colorMode, mermaidTheme })),
       [
-        { name: "arcade", colorMode: "light", mermaidTheme: "default" },
-        { name: "arcade", colorMode: "dark", mermaidTheme: "dark" },
+        { name: "dark-side", colorMode: "light", mermaidTheme: "default" },
+        { name: "dark-side", colorMode: "dark", mermaidTheme: "dark" },
       ],
     );
     assert.deepEqual(
       (({ name, colorMode, mermaidTheme }) => ({ name, colorMode, mermaidTheme }))(
         resolveTheme("random", () => 0.999),
       ),
-      { name: "space-command", colorMode: "independent", mermaidTheme: "dark" },
+      { name: "dark-side", colorMode: "system", mermaidTheme: "system" },
     );
     assert.throws(
       () => validateThemeChoice("sparkles"),

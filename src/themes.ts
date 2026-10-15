@@ -116,6 +116,24 @@ export const THEMES: readonly Theme[] = [
 		mermaidTheme: "dark",
 		stylesheet: "space-command.css",
 	},
+	{
+		name: "light-side",
+		description: "Hopeful temple stone, distant horizons, and luminous blue starlight",
+		colorMode: "system",
+		appearances: ["light", "dark"],
+		mermaidTheme: "system",
+		stylesheet: "light-side.css",
+		artVariants: 4,
+	},
+	{
+		name: "dark-side",
+		description: "Severe command architecture, cold steel, and disciplined red light",
+		colorMode: "system",
+		appearances: ["light", "dark"],
+		mermaidTheme: "system",
+		stylesheet: "dark-side.css",
+		artVariants: 4,
+	},
 ];
 
 export type ThemeChoice = string;

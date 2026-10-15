@@ -69,7 +69,7 @@ Keep the original focused design with `classic`, or switch to the warm
 `storybook`, pastel-rainbow `unicorn`, neon `arcade`, full-spectrum `rainbow`,
 photocopied-punk `zine`, storybook `high-fantasy`, ink-and-parchment
 `adventurer-handbook`, gothic `inferno`, grim `dark-cathedral`, muddy fairy-tale
-`swamp`, or tactical `space-command` themes. Themes can follow the system,
+`swamp`, tactical `space-command`, hopeful `light-side`, or severe `dark-side` themes. Themes can follow the system,
 provide fixed light or dark appearances, or define an independent visual world:
 
 ```bash
@@ -83,6 +83,8 @@ viz --theme inferno --detach --open < examples/theme-showcase.json
 viz --theme dark-cathedral --detach --open < examples/theme-showcase.json
 viz --theme swamp --detach --open < examples/theme-showcase.json
 viz --theme space-command --detach --open < examples/theme-showcase.json
+viz --theme light-side --detach --open < examples/theme-showcase.json
+viz --theme dark-side --detach --open < examples/theme-showcase.json
 viz --theme random --detach --open < examples/theme-showcase.json
 viz --theme random_light --detach --open < examples/theme-showcase.json
 viz --theme random_dark --detach --open < examples/theme-showcase.json

@@ -128,6 +128,8 @@ describe("safe page rendering", () => {
     assert.match(html, /:root\[data-theme="dark-cathedral"\]/);
     assert.match(html, /:root\[data-theme="swamp"\]/);
     assert.match(html, /:root\[data-theme="space-command"\]/);
+    assert.match(html, /:root\[data-theme="light-side"\]/);
+    assert.match(html, /:root\[data-theme="dark-side"\]/);
     assert.match(html, /<span class="theme-art header-art" aria-hidden="true"><\/span>/);
     assert.match(html, /<span class="theme-art content-art" aria-hidden="true"><\/span>/);
     assert.match(html, /<label class="theme-control">/);
@@ -145,6 +147,10 @@ describe("safe page rendering", () => {
     assert.match(html, /<option value="dark-cathedral:independent">Dark Cathedral<\/option>/);
     assert.match(html, /<option value="swamp:independent">Swamp<\/option>/);
     assert.match(html, /<option value="space-command:independent">Space Command<\/option>/);
+    assert.match(html, /<option value="light-side:light">Light Side \[light\]<\/option>/);
+    assert.match(html, /<option value="light-side:dark">Light Side \[dark\]<\/option>/);
+    assert.match(html, /<option value="dark-side:light">Dark Side \[light\]<\/option>/);
+    assert.match(html, /<option value="dark-side:dark">Dark Side \[dark\]<\/option>/);
     assert.doesNotMatch(html, /(?:rainbow|zine|high-fantasy|adventurer-handbook|inferno|dark-cathedral|swamp|space-command):(?:light|dark)/);
     assert.match(html, /<option value="__surprise__">Surprise me<\/option>/);
     assert.match(html, /<pre class="mermaid" data-source="flowchart LR/);

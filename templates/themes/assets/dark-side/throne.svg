@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300">
+  <defs><linearGradient id="floor" x2="0" y2="1"><stop stop-color="#202125"/><stop offset="1" stop-color="#07080a"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="9"/></filter></defs>
+  <path fill="url(#floor)" d="M0 0h640v300H0z"/>
+  <path d="M0 68h640M0 161h640M129 0v300M510 0v300" stroke="#4b4d50" stroke-width="3"/>
+  <path d="m320 300-65-194h130z" fill="#2c0b0b"/>
+  <path d="M204 300 50 0M436 300 590 0M273 300 238 0M367 300 402 0" stroke="#36383b" stroke-width="5"/>
+  <path d="M261 259h118l-17-125-42-24-42 24z" fill="#121316" stroke="#717276" stroke-width="6"/>
+  <path d="M285 135v-31c0-30 70-30 70 0v31" fill="#08090b" stroke="#717276" stroke-width="6"/>
+  <path d="M305 103h30l11 24-26 15-26-15z" fill="#191b1f"/>
+  <path d="M310 116h20" stroke="#e33731" stroke-width="5"/><path d="M310 116h20" stroke="#e33731" stroke-width="17" opacity=".3" filter="url(#g)"/>
+  <path d="M207 263h226" stroke="#e33731" stroke-width="4"/><path d="M207 263h226" stroke="#e33731" stroke-width="18" opacity=".2" filter="url(#g)"/>
+</svg>
