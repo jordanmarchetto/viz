@@ -1,0 +1,134 @@
+:root[data-theme="arcade"][data-theme-mode="light"] {
+	color-scheme: light;
+	--bg: #f7f2ff;
+	--surface: #ffffff;
+	--border: #805dae;
+	--text: #211235;
+	--muted: #5f526d;
+	--accent: #007a72;
+	--accent-soft: #d6f6f2;
+	--accent-text: #ffffff;
+	--blocker: #a9254e;
+	--blocker-soft: #ffe1eb;
+	--nitpick: #765300;
+	--nitpick-soft: #ffefbd;
+	--done: #146546;
+	--radius: 5px;
+	--measure: 68ch;
+}
+
+:root[data-theme="arcade"][data-theme-mode="dark"] {
+	color-scheme: dark;
+	--bg: #0d0820;
+	--surface: #18102f;
+	--border: #523987;
+	--text: #f5f0ff;
+	--muted: #b9a9d2;
+	--accent: #24d9c7;
+	--accent-soft: #123c45;
+	--accent-text: #071715;
+	--blocker: #ff7895;
+	--blocker-soft: #45182d;
+	--nitpick: #ffd166;
+	--nitpick-soft: #3d3219;
+	--done: #5af29d;
+	--radius: 5px;
+	--measure: 68ch;
+}
+
+html[data-theme="arcade"] body {
+	background-color: var(--bg);
+	background-image:
+		linear-gradient(rgb(36 217 199 / 5%) 1px, transparent 1px),
+		linear-gradient(90deg, rgb(36 217 199 / 5%) 1px, transparent 1px),
+		radial-gradient(circle at 50% -10%, rgb(255 63 180 / 24%), transparent 42%);
+	background-size: 32px 32px, 32px 32px, 100% 100%;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	text-shadow: 0 0 12px rgb(245 240 255 / 8%);
+}
+
+html[data-theme="arcade"] header {
+	position: relative;
+	border-bottom: 2px solid var(--accent);
+	box-shadow: 0 5px 0 rgb(255 63 180 / 45%);
+}
+
+html[data-theme="arcade"] header::after {
+	content: "INSERT COIN  ✦  PLAYER ONE READY";
+	display: block;
+	margin-top: 0.8rem;
+	color: var(--nitpick);
+	font-size: 0.7rem;
+	letter-spacing: 0.12em;
+}
+
+html[data-theme="arcade"] header h1,
+html[data-theme="arcade"] .md h1,
+html[data-theme="arcade"] .md h2,
+html[data-theme="arcade"] .decide h2 {
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	text-shadow: 2px 2px 0 rgb(140 37 122 / 45%), 0 0 12px rgb(36 217 199 / 25%);
+}
+
+html[data-theme="arcade"] .card,
+html[data-theme="arcade"] details.group,
+html[data-theme="arcade"] details.ref,
+html[data-theme="arcade"] figure.diagram,
+html[data-theme="arcade"] .decide {
+	border: 2px solid var(--border);
+	box-shadow: 5px 5px 0 rgb(140 37 122 / 42%), 0 0 18px rgb(36 217 199 / 7%);
+}
+
+html[data-theme="arcade"] .card:nth-child(odd) { border-color: #b13a9c; }
+html[data-theme="arcade"] .card:nth-child(even) { border-color: var(--accent); }
+
+html[data-theme="arcade"][data-theme-mode="light"] details.group > summary,
+html[data-theme="arcade"][data-theme-mode="light"] details.ref > summary {
+	background: linear-gradient(90deg, #eee3ff, var(--surface));
+}
+
+html[data-theme="arcade"][data-theme-mode="dark"] details.group > summary,
+html[data-theme="arcade"][data-theme-mode="dark"] details.ref > summary {
+	background: linear-gradient(90deg, #251344, var(--surface));
+}
+
+html[data-theme="arcade"][data-theme-mode="light"] figure.diagram {
+	background: linear-gradient(180deg, #ffffff, #e8f8ff);
+	border-color: var(--accent);
+}
+
+html[data-theme="arcade"][data-theme-mode="dark"] figure.diagram {
+	background: linear-gradient(180deg, #17102f, #0f1830);
+	border-color: var(--accent);
+}
+
+html[data-theme="arcade"] .decide {
+	background-image: repeating-linear-gradient(
+		0deg,
+		rgb(127 85 170 / 4%) 0,
+		rgb(127 85 170 / 4%) 1px,
+		transparent 1px,
+		transparent 4px
+	);
+}
+
+html[data-theme="arcade"] .option.selected {
+	box-shadow: inset 4px 0 0 var(--accent), 0 0 14px rgb(36 217 199 / 12%);
+}
+
+html[data-theme="arcade"] button {
+	border: 2px solid var(--accent-text);
+	box-shadow: 4px 4px 0 #8c257a, 0 0 16px rgb(36 217 199 / 28%);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+html[data-theme="arcade"][data-theme-mode="dark"] button {
+	border-color: #bffdf6;
+}
+
+html[data-theme="arcade"] button:active {
+	transform: translate(3px, 3px);
+	box-shadow: 1px 1px 0 #8c257a;
+}

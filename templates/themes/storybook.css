@@ -1,0 +1,101 @@
+:root[data-theme="storybook"][data-theme-mode="light"] {
+	color-scheme: light;
+	--bg: #fffaf0;
+	--surface: #f5edff;
+	--border: #d8c8e8;
+	--text: #30233f;
+	--muted: #655a70;
+	--accent: #7137a8;
+	--accent-soft: #eadcff;
+	--accent-text: #ffffff;
+	--blocker: #a8324a;
+	--blocker-soft: #ffe3e9;
+	--nitpick: #805500;
+	--nitpick-soft: #ffefbf;
+	--done: #17674d;
+	--radius: 16px;
+	--measure: 68ch;
+}
+
+:root[data-theme="storybook"][data-theme-mode="dark"] {
+	color-scheme: dark;
+	--bg: #18121f;
+	--surface: #261d31;
+	--border: #604b72;
+	--text: #f6eefa;
+	--muted: #c2b1ca;
+	--accent: #c391f0;
+	--accent-soft: #3b294c;
+	--accent-text: #1b1022;
+	--blocker: #ff91aa;
+	--blocker-soft: #492332;
+	--nitpick: #f0c56d;
+	--nitpick-soft: #44371d;
+	--done: #70d6ae;
+	--radius: 16px;
+	--measure: 68ch;
+}
+
+html[data-theme="storybook"] body {
+	background-color: var(--bg);
+	background-image:
+		radial-gradient(circle at 10% 8%, rgb(113 55 168 / 8%) 0 2px, transparent 3px),
+		radial-gradient(circle at 90% 18%, rgb(236 126 94 / 10%) 0 3px, transparent 4px);
+	background-size: 42px 42px, 67px 67px;
+	font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+}
+
+html[data-theme="storybook"] header {
+	position: relative;
+	border-bottom: 3px double var(--border);
+}
+
+html[data-theme="storybook"] header::after {
+	content: "✦";
+	position: absolute;
+	right: 0.2rem;
+	bottom: 0.9rem;
+	color: #d05c88;
+	font-size: 1.5rem;
+	transform: rotate(12deg);
+}
+
+html[data-theme="storybook"] header h1,
+html[data-theme="storybook"] .md h1,
+html[data-theme="storybook"] .md h2,
+html[data-theme="storybook"] .decide h2 {
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+html[data-theme="storybook"] .card,
+html[data-theme="storybook"] details.group,
+html[data-theme="storybook"] details.ref,
+html[data-theme="storybook"] figure.diagram,
+html[data-theme="storybook"] .decide {
+	box-shadow: 0 4px 0 rgb(113 55 168 / 16%);
+}
+
+html[data-theme="storybook"] .card:nth-child(3n + 1) { border-top: 4px solid #d05c88; }
+html[data-theme="storybook"] .card:nth-child(3n + 2) { border-top: 4px solid #398b83; }
+html[data-theme="storybook"] .card:nth-child(3n) { border-top: 4px solid #d28a2e; }
+
+html[data-theme="storybook"] .decide {
+	border: 2px solid var(--border);
+}
+
+html[data-theme="storybook"][data-theme-mode="light"] .decide {
+	background-image: linear-gradient(135deg, rgb(255 255 255 / 45%), transparent 45%);
+}
+
+html[data-theme="storybook"][data-theme-mode="dark"] .decide {
+	background-image: linear-gradient(135deg, rgb(255 255 255 / 5%), transparent 45%);
+}
+
+html[data-theme="storybook"] button {
+	box-shadow: 0 3px 0 #4e2477;
+}
+
+html[data-theme="storybook"] button:active {
+	transform: translateY(2px);
+	box-shadow: 0 1px 0 #4e2477;
+}

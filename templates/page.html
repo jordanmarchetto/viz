@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" data-theme="{{THEME}}" data-theme-mode="{{THEMEMODE}}" data-art-variant="{{ARTVARIANT}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy"
+      content="object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>{{TITLE}}</title>
+<script>
+if (document.documentElement.dataset.themeMode === "system") {
+  document.documentElement.dataset.themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+</script>
+<style>
+{{STYLE}}
+</style>
+</head>
+<body>
+<header>{{HEADER}}</header>
+<main>
+{{BODY}}
+</main>
+{{BAR}}
+{{EXTRA}}
+<script>window.VIZ = {{DATA}};</script>
+<script>
+{{SCRIPT}}
+</script>
+</body>
+</html>

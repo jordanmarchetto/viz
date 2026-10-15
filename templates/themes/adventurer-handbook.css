@@ -1,0 +1,378 @@
+:root[data-theme="adventurer-handbook"][data-theme-mode="independent"] {
+	--bg: #252321;
+	--surface: #eee5ce;
+	--border: #9c8b68;
+	--text: #24201a;
+	--muted: #766649;
+	--accent: #58180d;
+	--accent-soft: #e0e5c1;
+	--accent-text: #fff8df;
+	--blocker: #9c2b1b;
+	--blocker-soft: #edc4ad;
+	--nitpick: #70510d;
+	--nitpick-soft: #eadb9b;
+	--done: #3f7047;
+	--radius: 0;
+	--measure: 68rem;
+	--handbook-parchment: url("{{asset:adventurer-handbook/parchment.jpg}}");
+	--handbook-watercolor: url("{{asset:adventurer-handbook/watercolor-dragon.svg}}");
+	--handbook-divider: url("{{asset:adventurer-handbook/divider.svg}}");
+	--handbook-stat-frame: url("{{asset:adventurer-handbook/stat-frame.svg}}");
+	--handbook-tankard: url("{{asset:adventurer-handbook/tankard.svg}}");
+	--handbook-swords: url("{{asset:adventurer-handbook/swords.svg}}");
+	--handbook-spellbook: url("{{asset:adventurer-handbook/spellbook.svg}}");
+	--handbook-potion: url("{{asset:adventurer-handbook/potion.svg}}");
+	--handbook-compass: url("{{asset:adventurer-handbook/compass.svg}}");
+}
+
+html[data-theme="adventurer-handbook"] body {
+	background-color: #eee5ce;
+	background-image: var(--handbook-parchment);
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 17px;
+}
+
+html[data-theme="adventurer-handbook"][data-art-variant="0"] { --handbook-header-art: var(--handbook-tankard); --handbook-content-art: var(--handbook-spellbook); }
+html[data-theme="adventurer-handbook"][data-art-variant="1"] { --handbook-header-art: var(--handbook-swords); --handbook-content-art: var(--handbook-potion); }
+html[data-theme="adventurer-handbook"][data-art-variant="2"] { --handbook-header-art: var(--handbook-spellbook); --handbook-content-art: var(--handbook-compass); }
+html[data-theme="adventurer-handbook"][data-art-variant="3"] { --handbook-header-art: var(--handbook-potion); --handbook-content-art: var(--handbook-watercolor); }
+html[data-theme="adventurer-handbook"][data-art-variant="4"] { --handbook-header-art: var(--handbook-compass); --handbook-content-art: var(--handbook-tankard); }
+html[data-theme="adventurer-handbook"][data-art-variant="5"] { --handbook-header-art: var(--handbook-watercolor); --handbook-content-art: var(--handbook-swords); }
+
+html[data-theme="adventurer-handbook"] header {
+	position: relative;
+	max-width: 64rem;
+	min-height: 17rem;
+	margin: 2rem auto 2.2rem;
+	padding: 2.3rem 19rem 3rem 3.2rem;
+	border: 0;
+	background-color: #eee5ce;
+	background-image: var(--handbook-parchment);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	box-shadow: 0 12px 28px #0008, inset 0 0 34px #7b654229;
+	color: #24201a;
+	text-align: left;
+}
+html[data-theme="adventurer-handbook"] header::before {
+	content: "PLAYER’S REFERENCE";
+	display: block;
+	margin-bottom: 0.45rem;
+	color: #766649;
+	font: 700 0.72rem/1.2 "Trebuchet MS", Arial, sans-serif;
+	letter-spacing: 0.18em;
+}
+html[data-theme="adventurer-handbook"] header::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 1.6rem;
+	background: var(--handbook-divider) center / 100% 100% no-repeat;
+}
+html[data-theme="adventurer-handbook"] .theme-art {
+	display: block;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	filter: drop-shadow(2px 4px 2px rgb(73 52 31 / 24%));
+	pointer-events: none;
+}
+html[data-theme="adventurer-handbook"] .header-art {
+	position: absolute;
+	right: 1.5rem;
+	bottom: 1.4rem;
+	width: 16rem;
+	height: 14rem;
+	background-image: var(--handbook-header-art);
+}
+html[data-theme="adventurer-handbook"] .content-art {
+	align-self: flex-end;
+	width: 17rem;
+	height: 12rem;
+	margin: -2.8rem 1.5rem -3.8rem 0;
+	background-image: var(--handbook-content-art);
+	position: relative;
+	z-index: 3;
+	transform: rotate(-2deg);
+}
+html[data-theme="adventurer-handbook"][data-art-variant="3"] .content-art,
+html[data-theme="adventurer-handbook"][data-art-variant="5"] .header-art {
+	width: 26rem;
+	opacity: 0.72;
+}
+
+html[data-theme="adventurer-handbook"] header h1 {
+	margin: 0;
+	color: #58180d;
+	font-size: clamp(2.5rem, 6vw, 4.8rem);
+	font-weight: 600;
+	line-height: 0.95;
+	letter-spacing: -0.04em;
+}
+html[data-theme="adventurer-handbook"] header p {
+	margin-top: 0.8rem;
+	color: #24201a;
+	font-family: "Trebuchet MS", Arial, sans-serif;
+	font-size: 0.95rem;
+}
+
+html[data-theme="adventurer-handbook"] main {
+	max-width: 64rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.35rem;
+}
+html[data-theme="adventurer-handbook"] main > .md,
+html[data-theme="adventurer-handbook"] main > details.group,
+html[data-theme="adventurer-handbook"] main > details.ref,
+html[data-theme="adventurer-handbook"] main > figure.diagram,
+html[data-theme="adventurer-handbook"] main > .decide {
+	margin: 0;
+	border: 0;
+	background-color: #eee5ce;
+	background-image: var(--handbook-parchment);
+	background-size: cover;
+	box-shadow: 0 9px 22px #0007, inset 0 0 28px #7b65421f;
+}
+html[data-theme="adventurer-handbook"] main > .md { padding: 1.7rem 2rem 1.9rem; }
+html[data-theme="adventurer-handbook"] .md h1,
+html[data-theme="adventurer-handbook"] .md h2,
+html[data-theme="adventurer-handbook"] .md h3,
+html[data-theme="adventurer-handbook"] .decide h2 {
+	color: #58180d;
+	font-weight: 600;
+	letter-spacing: -0.025em;
+}
+html[data-theme="adventurer-handbook"] .md h1 { font-size: 2rem; }
+html[data-theme="adventurer-handbook"] .md h2,
+html[data-theme="adventurer-handbook"] .decide h2 { font-size: 1.65rem; }
+html[data-theme="adventurer-handbook"] .md h3 {
+	padding-bottom: 0.12rem;
+	border-bottom: 2px solid #c0ad6a;
+	font-size: 1.25rem;
+}
+html[data-theme="adventurer-handbook"] .md p,
+html[data-theme="adventurer-handbook"] .md li { line-height: 1.35; }
+html[data-theme="adventurer-handbook"] main > .md p:first-of-type::first-letter {
+	float: left;
+	margin: -0.12em 0.1em -0.18em 0;
+	color: #77643b;
+	font-size: 4.2rem;
+	font-weight: 700;
+	line-height: 1;
+}
+html[data-theme="adventurer-handbook"] .md strong { letter-spacing: -0.02em; }
+html[data-theme="adventurer-handbook"] .md code { border-color: #b7a47c; background: #faf7ea; color: #58180d; }
+html[data-theme="adventurer-handbook"] .md blockquote {
+	padding: 0.7rem 1rem;
+	border: 1px solid #a8a982;
+	border-left: 5px solid #8c9065;
+	background: #e0e5c1;
+	color: #24201a;
+	box-shadow: 1px 4px 10px #665d4b55;
+}
+html[data-theme="adventurer-handbook"] .md table { font-family: "Trebuchet MS", Arial, sans-serif; }
+html[data-theme="adventurer-handbook"] .md th,
+html[data-theme="adventurer-handbook"] .md td { border: 0; }
+html[data-theme="adventurer-handbook"] .md tbody tr:nth-child(odd) { background: #e0e5c1; }
+
+html[data-theme="adventurer-handbook"] .cards {
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+	margin: 0;
+	padding: 1.5rem;
+	background: #eee5ce;
+	box-shadow: 0 9px 22px #0007, inset 0 0 28px #7b65421f;
+}
+html[data-theme="adventurer-handbook"] .card {
+	position: relative;
+	min-height: 9rem;
+	justify-content: space-between;
+	padding: 1rem 0.9rem;
+	border: 7px solid #9c2b1b;
+	background-color: #f2e5b5;
+	background-image: var(--handbook-parchment);
+	background-size: cover;
+	border-image: var(--handbook-stat-frame) 18 round;
+	box-shadow: 1px 4px 12px #665d4b66;
+}
+html[data-theme="adventurer-handbook"] .card::before,
+html[data-theme="adventurer-handbook"] .card::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background: repeating-linear-gradient(135deg, #9c2b1b 0 6px, #c88547 6px 12px);
+}
+html[data-theme="adventurer-handbook"] .card::before { top: -6px; }
+html[data-theme="adventurer-handbook"] .card::after { bottom: -6px; }
+html[data-theme="adventurer-handbook"] a.card:hover { border-color: #58180d; transform: translateY(-2px); }
+html[data-theme="adventurer-handbook"] .card-title { color: #58180d; font-size: 1.15rem; font-weight: 700; }
+html[data-theme="adventurer-handbook"] .card-meta { color: #24201a; font-family: "Trebuchet MS", Arial, sans-serif; }
+
+html[data-theme="adventurer-handbook"] main > details.group {
+	padding: 0.65rem 1rem 0.85rem;
+	border: 1px solid #a8a982;
+	background: #e0e5c1;
+	box-shadow: 1px 5px 14px #0006;
+}
+html[data-theme="adventurer-handbook"] details.group > summary {
+	padding: 0.5rem 0.35rem;
+	border-bottom: 2px solid #7f805e;
+	background: transparent;
+}
+html[data-theme="adventurer-handbook"] details.group[open] > summary { border-bottom: 2px solid #7f805e; }
+html[data-theme="adventurer-handbook"] .group-label { color: #58180d; font-size: 1.2rem; }
+html[data-theme="adventurer-handbook"] .group-meta,
+html[data-theme="adventurer-handbook"] .group-head::before { color: #665a3f; }
+html[data-theme="adventurer-handbook"] .group-body { padding: 0 0.5rem; }
+
+html[data-theme="adventurer-handbook"] main > figure.diagram {
+	padding: 1.5rem 2rem;
+	border: 8px double #b7a47c;
+	background: #faf7ea;
+}
+html[data-theme="adventurer-handbook"] figure.diagram figcaption {
+	color: #58180d;
+	font-family: "Trebuchet MS", Arial, sans-serif;
+	font-size: 0.8rem;
+}
+
+html[data-theme="adventurer-handbook"] main > details.ref { border-top: 4px solid #9c2b1b; }
+html[data-theme="adventurer-handbook"] details.ref > summary {
+	padding: 0.85rem 1.2rem;
+	background: #eee5ce;
+	color: #58180d;
+}
+html[data-theme="adventurer-handbook"] details.ref pre { border-top: 2px solid #c0ad6a; background: #faf7ea; }
+
+html[data-theme="adventurer-handbook"] main > .decide {
+	position: relative;
+	padding: 1.6rem 1.8rem;
+	border: 8px solid #9c2b1b;
+	background-color: #f2e5b5;
+	background-image: var(--handbook-parchment);
+	background-size: cover;
+	border-image: var(--handbook-stat-frame) 18 round;
+}
+html[data-theme="adventurer-handbook"] .decide::before,
+html[data-theme="adventurer-handbook"] .decide::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background: repeating-linear-gradient(135deg, #9c2b1b 0 7px, #c88547 7px 14px);
+}
+html[data-theme="adventurer-handbook"] .decide::before { top: -7px; }
+html[data-theme="adventurer-handbook"] .decide::after { bottom: -7px; }
+html[data-theme="adventurer-handbook"] .options {
+	gap: 0;
+	border-top: 2px solid #58180d;
+	border-bottom: 2px solid #58180d;
+}
+html[data-theme="adventurer-handbook"] .option {
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	font-family: "Trebuchet MS", Arial, sans-serif;
+}
+html[data-theme="adventurer-handbook"] .option:nth-child(odd) { background: #e0e5c1; }
+html[data-theme="adventurer-handbook"] .option:hover { background: #d2d9ad; }
+html[data-theme="adventurer-handbook"] .option.selected {
+	border: 0;
+	background: #cbd5a5;
+	box-shadow: inset 6px 0 #58180d;
+}
+html[data-theme="adventurer-handbook"] .option textarea,
+html[data-theme="adventurer-handbook"] .note textarea { border-color: #9c8b68; background: #faf7ea; }
+
+html[data-theme="adventurer-handbook"] figure.data-table {
+	margin: 0;
+	padding: 1.4rem 1.6rem 1.7rem;
+	border: 0;
+	background-color: #eee5ce;
+	background-image: var(--handbook-parchment);
+	background-size: cover;
+	box-shadow: 0 9px 22px #0007, inset 0 0 28px #7b65421f;
+}
+html[data-theme="adventurer-handbook"] figure.data-table figcaption {
+	padding: 0 0 0.45rem;
+	border-bottom: 2px solid #86aabd;
+	color: #315d80;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 1.25rem;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	text-transform: none;
+}
+html[data-theme="adventurer-handbook"] .table-scroll {
+	margin-top: 0.65rem;
+	border-top: 3px double #6f96ab;
+	border-bottom: 3px double #6f96ab;
+}
+html[data-theme="adventurer-handbook"] figure.data-table table {
+	font-family: "Trebuchet MS", Arial, sans-serif;
+	font-size: 0.88rem;
+}
+html[data-theme="adventurer-handbook"] figure.data-table th {
+	padding: 0.5rem 0.65rem;
+	border: 0;
+	background: #3f6f97;
+	color: #f5fbff;
+	font-size: 0.78rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+html[data-theme="adventurer-handbook"] figure.data-table td {
+	padding: 0.48rem 0.65rem;
+	border: 0;
+}
+html[data-theme="adventurer-handbook"] figure.data-table tbody tr:nth-child(odd) { background: #d9e9f1; }
+html[data-theme="adventurer-handbook"] figure.data-table tbody tr:nth-child(even) { background: #f3f8fa; }
+html[data-theme="adventurer-handbook"] figure.data-table td:first-child { color: #315d80; font-weight: 700; }
+
+html[data-theme="adventurer-handbook"] .chip {
+	border: 1px solid #8f7d58;
+	border-radius: 1px;
+	background: #e0e5c1;
+	font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+html[data-theme="adventurer-handbook"] .bar {
+	background: #eee5ce;
+	border-top: 4px solid #58180d;
+	box-shadow: 0 -5px 18px #0008;
+}
+html[data-theme="adventurer-handbook"] .progress,
+html[data-theme="adventurer-handbook"] .progress strong,
+html[data-theme="adventurer-handbook"] .theme-control { color: #58180d; }
+html[data-theme="adventurer-handbook"] .theme-control select {
+	border: 1px solid #9c8b68;
+	border-radius: 1px;
+	background: #faf7ea;
+	color: #24201a;
+	font-family: "Trebuchet MS", Arial, sans-serif;
+}
+html[data-theme="adventurer-handbook"] button {
+	border: 1px solid #58180d;
+	border-radius: 1px;
+	background: #58180d;
+	box-shadow: 0 2px 0 #311007;
+	font-family: "Trebuchet MS", Arial, sans-serif;
+}
+html[data-theme="adventurer-handbook"] button.secondary { background: #e0e5c1; color: #58180d; border-color: #8f7d58; }
+
+@media (max-width: 700px) {
+	html[data-theme="adventurer-handbook"] body { padding-inline: 0.8rem; }
+	html[data-theme="adventurer-handbook"] header { min-height: 0; padding: 2rem 1.4rem 3rem; }
+	html[data-theme="adventurer-handbook"] .header-art { right: 0.3rem; bottom: 0.5rem; width: 9rem; height: 9rem; opacity: 0.2; }
+	html[data-theme="adventurer-handbook"] .content-art { align-self: center; width: 12rem; height: 9rem; margin: -1rem auto -2rem; opacity: 0.75; }
+	html[data-theme="adventurer-handbook"] .cards { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,45 @@
+{
+  "title": "PR #412 — Retry handling",
+  "subtitle": "example-service · TASK-1187 · 3 files changed",
+  "blocks": [
+    {
+      "type": "md",
+      "text": "## Verdict: hold\n\nTwo blockers, one nitpick. The retry path looks right in the happy case, but the request-key handling changes behaviour for partial failures.\n\n| Check | Result |\n|---|---|\n| Tests | passing |\n| Lint | passing |\n| Acceptance criteria | 2 of 3 |"
+    },
+    {
+      "type": "ref",
+      "label": "Diff — src/retry.ts",
+      "cmd": "gh-axi pr diff 412"
+    },
+    {
+      "type": "decide",
+      "id": "c1",
+      "severity": "blocker",
+      "where": "src/retry.ts:88",
+      "title": "Retries reuse a single request key",
+      "body": "Every attempt in the loop sends the **same** key. If the first attempt times out after the operation succeeds, the retry gets deduplicated and the caller sees a failure for work that actually completed.\n\nThe ticket asks for at-least-once delivery, which this satisfies, but not for the duplicate-suppression behaviour it quietly introduces.",
+      "options": ["Raise it as a blocker", "Ask the author first", "Not a problem"],
+      "recommend": "Ask the author first"
+    },
+    {
+      "type": "decide",
+      "id": "c2",
+      "severity": "blocker",
+      "where": "src/retry.ts:140",
+      "title": "No upper bound on backoff",
+      "body": "`delay *= 2` with no ceiling. With `maxAttempts: 12` the last wait is over an hour.",
+      "options": ["Raise it as a blocker", "Ask the author first", "Not a problem"],
+      "recommend": "Raise it as a blocker"
+    },
+    {
+      "type": "decide",
+      "id": "n1",
+      "severity": "nitpick",
+      "where": "src/types.ts:14",
+      "title": "New type is not exported from the barrel file",
+      "body": "Everything else in this directory is re-exported from `index.ts`. Probably an oversight.",
+      "options": ["Mention it", "Let it go"],
+      "recommend": "Mention it"
+    }
+  ]
+}

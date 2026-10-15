@@ -1,0 +1,61 @@
+{
+  "title": "Release readiness — constellation",
+  "subtitle": "A representative page for previewing viz themes",
+  "blocks": [
+    {
+      "type": "md",
+      "text": "## Today’s story\n\nThe retry path is stable, the migration is rehearsed, and **one decision remains** before release. Themes change the mood, not the information hierarchy."
+    },
+    {
+      "type": "cards",
+      "items": [
+        {"title": "API checks", "badge": "approve", "meta": "42 passing · 0 skipped"},
+        {"title": "Migration rehearsal", "badge": "easy", "meta": "completed in 3m 18s"},
+        {"title": "Rollback notes", "badge": "nitpick", "meta": "one clarification requested"}
+      ]
+    },
+    {
+      "type": "group",
+      "label": "What changed",
+      "badge": "approve",
+      "meta": "three small, reversible steps",
+      "open": true,
+      "blocks": [
+        {
+          "type": "md",
+          "text": "1. Read from the new field.\n2. Keep the old field during the observation window.\n3. Remove the compatibility path after metrics settle."
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "label": "Release encounter table",
+      "columns": ["Check", "Target", "Result"],
+      "rows": [
+        ["API suite", "42 passing", "Ready"],
+        ["Migration rehearsal", "Under 5 minutes", "3m 18s"],
+        ["Observation window", "30 minutes", "Pending decision"]
+      ]
+    },
+    {
+      "type": "diagram",
+      "label": "Release path",
+      "text": "flowchart LR\n  A[Deploy] --> B[Observe]\n  B --> C{Healthy?}\n  C -->|yes| D[Complete]\n  C -->|no| E[Rollback]"
+    },
+    {
+      "type": "ref",
+      "file": "README.md",
+      "label": "Supporting notes"
+    },
+    {
+      "type": "decide",
+      "id": "release",
+      "severity": "nitpick",
+      "where": "docs/release.md:24",
+      "title": "How long should the observation window remain open?",
+      "body": "The current runbook recommends **30 minutes**. Recent releases reached stable traffic after twelve minutes.",
+      "options": ["Keep 30 minutes", "Reduce to 20 minutes", "Decide after the deploy"],
+      "recommend": "Keep 30 minutes"
+    }
+  ]
+}

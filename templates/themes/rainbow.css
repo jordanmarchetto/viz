@@ -1,0 +1,236 @@
+:root[data-theme="rainbow"][data-theme-mode="independent"] {
+	--bg: #ff5c8a;
+	--surface: #fff8dc;
+	--border: #241638;
+	--text: #241638;
+	--muted: #604c75;
+	--accent: #5b2be0;
+	--accent-soft: #f4d4ff;
+	--accent-text: #ffffff;
+	--blocker: #c91f4f;
+	--blocker-soft: #ffc4d6;
+	--nitpick: #795400;
+	--nitpick-soft: #ffe56b;
+	--done: #08734f;
+	--radius: 0;
+	--measure: 76rem;
+}
+
+html[data-theme="rainbow"] body {
+	background-color: var(--bg);
+	background-image:
+		linear-gradient(90deg,
+			#ff5c8a 0 14.28%,
+			#ff8a3d 14.28% 28.56%,
+			#ffd83d 28.56% 42.84%,
+			#54d98c 42.84% 57.12%,
+			#49c6ed 57.12% 71.4%,
+			#8a70e8 71.4% 85.68%,
+			#d868d5 85.68%);
+	background-attachment: fixed;
+	font-family: ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+	font-size: 18px;
+}
+
+html[data-theme="rainbow"] header {
+	max-width: 70rem;
+	margin: 2rem auto 2.75rem;
+	padding: 2rem 2.4rem 2.2rem;
+	border: 4px solid var(--border);
+	border-radius: 3.5rem 1rem 3.5rem 1rem;
+	background: #ffe85c;
+	box-shadow: 12px 12px 0 var(--border);
+	transform: rotate(-1deg);
+}
+
+html[data-theme="rainbow"] header h1 {
+	font-size: clamp(2.2rem, 7vw, 5.6rem);
+	line-height: 0.92;
+	letter-spacing: -0.065em;
+	text-transform: uppercase;
+}
+
+html[data-theme="rainbow"] header p {
+	margin-top: 1rem;
+	color: var(--text);
+	font-size: 1.05rem;
+	font-weight: 800;
+}
+
+html[data-theme="rainbow"] main {
+	max-width: 72rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+html[data-theme="rainbow"] main > .md,
+html[data-theme="rainbow"] main > details.group,
+html[data-theme="rainbow"] main > details.ref,
+html[data-theme="rainbow"] main > figure.diagram,
+html[data-theme="rainbow"] main > .decide {
+	margin: 0;
+	border: 4px solid var(--border);
+	box-shadow: 9px 9px 0 var(--border);
+}
+
+html[data-theme="rainbow"] main > .md {
+	align-self: flex-start;
+	max-width: 54rem;
+	padding: 1.5rem 1.8rem;
+	border-radius: 0.75rem 3rem 0.75rem 3rem;
+	background: #5bdcf0;
+	transform: rotate(0.6deg);
+}
+
+html[data-theme="rainbow"] main > .md h1,
+html[data-theme="rainbow"] main > .md h2,
+html[data-theme="rainbow"] main > .md h3 {
+	font-size: clamp(1.65rem, 4vw, 2.65rem);
+	letter-spacing: -0.035em;
+}
+
+html[data-theme="rainbow"] .cards {
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+	margin: 0;
+}
+
+html[data-theme="rainbow"] .card {
+	min-height: 10rem;
+	justify-content: space-between;
+	padding: 1.15rem;
+	border: 4px solid var(--border);
+	border-radius: 2rem 0.6rem 2rem 0.6rem;
+	box-shadow: 7px 7px 0 var(--border);
+	color: var(--text);
+}
+
+html[data-theme="rainbow"] .card:nth-child(6n + 1) { background: #ff9fbd; transform: rotate(-1.5deg); }
+html[data-theme="rainbow"] .card:nth-child(6n + 2) { background: #75e6a8; transform: rotate(1deg); }
+html[data-theme="rainbow"] .card:nth-child(6n + 3) { background: #ffe56b; transform: rotate(-0.5deg); }
+html[data-theme="rainbow"] .card:nth-child(6n + 4) { background: #73d9ff; transform: rotate(1.25deg); }
+html[data-theme="rainbow"] .card:nth-child(6n + 5) { background: #bca9ff; transform: rotate(-1deg); }
+html[data-theme="rainbow"] .card:nth-child(6n) { background: #ffad66; transform: rotate(0.75deg); }
+html[data-theme="rainbow"] a.card:hover { border-color: var(--border); transform: translateY(-4px) rotate(0deg); }
+html[data-theme="rainbow"] .card-title { font-size: 1.25rem; }
+html[data-theme="rainbow"] .card-meta { color: var(--text); font-weight: 700; }
+
+html[data-theme="rainbow"] main > details.group {
+	align-self: flex-end;
+	width: min(62rem, 94%);
+	border-radius: 3rem 0.75rem 0.75rem 0.75rem;
+	background: #ff974f;
+	transform: rotate(-0.4deg);
+}
+
+html[data-theme="rainbow"] details.group > summary {
+	padding: 1.2rem 1.4rem;
+	border: 0;
+	background: transparent;
+}
+html[data-theme="rainbow"] details.group[open] > summary { border-bottom: 4px solid var(--border); }
+html[data-theme="rainbow"] .group-label { font-size: 1.35rem; }
+html[data-theme="rainbow"] .group-meta,
+html[data-theme="rainbow"] .group-head::before { color: var(--text); }
+html[data-theme="rainbow"] .group-body { padding: 0.3rem 1.5rem 0.8rem; }
+
+html[data-theme="rainbow"] main > figure.diagram {
+	align-self: flex-start;
+	width: min(60rem, 96%);
+	padding: 1.5rem;
+	border-radius: 0.75rem 4rem 0.75rem 0.75rem;
+	background: #c9b5ff;
+	transform: rotate(0.35deg);
+}
+html[data-theme="rainbow"] figure.diagram figcaption,
+html[data-theme="rainbow"] figure.diagram .mermaid { color: var(--text); }
+
+html[data-theme="rainbow"] main > details.ref {
+	align-self: flex-end;
+	width: min(56rem, 92%);
+	border-radius: 0.75rem 0.75rem 3rem 0.75rem;
+	background: #ffe66b;
+	transform: rotate(-0.6deg);
+}
+html[data-theme="rainbow"] details.ref > summary { padding: 1rem 1.25rem; }
+html[data-theme="rainbow"] details.ref > summary::before,
+html[data-theme="rainbow"] details.ref > summary .hint { color: var(--text); }
+html[data-theme="rainbow"] details.ref pre { background: #fff8dc; border-top: 4px solid var(--border); }
+
+html[data-theme="rainbow"] main > .decide {
+	padding: 1.6rem;
+	border-radius: 4rem 0.75rem 4rem 0.75rem;
+	background: #72e3a2;
+	transform: rotate(0.35deg);
+}
+html[data-theme="rainbow"] .decide h2 { font-size: clamp(1.4rem, 3vw, 2.1rem); }
+html[data-theme="rainbow"] .option {
+	border: 3px solid var(--border);
+	border-radius: 999px;
+	background: #fff8dc;
+	padding: 0.8rem 1.1rem;
+}
+html[data-theme="rainbow"] .option:nth-child(4n + 1) { background: #ffbed2; }
+html[data-theme="rainbow"] .option:nth-child(4n + 2) { background: #ffe56b; }
+html[data-theme="rainbow"] .option:nth-child(4n + 3) { background: #8de3ff; }
+html[data-theme="rainbow"] .option:nth-child(4n) { background: #d7caff; }
+html[data-theme="rainbow"] .option.selected {
+	background: #fff8dc;
+	box-shadow: inset 14px 0 #ff4f7b, inset 28px 0 #ff9a3d, inset 42px 0 #ffe23d,
+		inset 56px 0 #46d78a, inset 70px 0 #44bfe8, inset 84px 0 #805ee0;
+	padding-left: calc(1.1rem + 84px);
+}
+html[data-theme="rainbow"] .option.other { padding: 1.15rem 2.25rem 1.35rem; }
+html[data-theme="rainbow"] .option textarea,
+html[data-theme="rainbow"] .note textarea { background: #fff8dc; border: 3px solid var(--border); }
+
+html[data-theme="rainbow"] .chip {
+	border: 2px solid var(--border);
+	background: #fff8dc;
+	color: var(--text);
+	box-shadow: 3px 3px 0 var(--border);
+}
+html[data-theme="rainbow"] .chip[data-severity] { color: var(--text); }
+html[data-theme="rainbow"] .chip[data-severity="blocker"],
+html[data-theme="rainbow"] .chip[data-severity="hold"] { background: #ff9fbd; }
+html[data-theme="rainbow"] .chip[data-severity="nitpick"],
+html[data-theme="rainbow"] .chip[data-severity="complex"] { background: #ffe56b; }
+html[data-theme="rainbow"] .chip[data-severity="approve"],
+html[data-theme="rainbow"] .chip[data-severity="easy"] { background: #75e6a8; }
+
+html[data-theme="rainbow"] .bar {
+	background: #5b2be0;
+	border-top: 4px solid var(--border);
+	color: #ffffff;
+}
+html[data-theme="rainbow"] .progress,
+html[data-theme="rainbow"] .progress strong,
+html[data-theme="rainbow"] .theme-control { color: #ffffff; }
+html[data-theme="rainbow"] .theme-control select {
+	border: 3px solid var(--border);
+	border-radius: 999px;
+	background: #ffe56b;
+	color: var(--text);
+	font-weight: 800;
+}
+html[data-theme="rainbow"] button {
+	border: 3px solid var(--border);
+	border-radius: 999px;
+	background: #ff7da5;
+	color: var(--text);
+	box-shadow: 4px 4px 0 var(--border);
+}
+html[data-theme="rainbow"] button.secondary { background: #75dfff; color: var(--text); border: 3px solid var(--border); }
+html[data-theme="rainbow"] button:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--border); }
+
+@media (max-width: 760px) {
+	html[data-theme="rainbow"] body { padding-inline: 0.85rem; }
+	html[data-theme="rainbow"] header { margin: 1rem 0.25rem 2rem; padding: 1.5rem; }
+	html[data-theme="rainbow"] .cards { grid-template-columns: 1fr; }
+	html[data-theme="rainbow"] .card { min-height: 7rem; }
+	html[data-theme="rainbow"] main > details.group,
+	html[data-theme="rainbow"] main > details.ref,
+	html[data-theme="rainbow"] main > figure.diagram { width: 100%; }
+	html[data-theme="rainbow"] .option.selected { padding-left: 1.1rem; box-shadow: inset 9px 0 #ff4f7b; }
+}

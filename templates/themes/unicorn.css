@@ -1,0 +1,133 @@
+:root[data-theme="unicorn"][data-theme-mode="light"] {
+	color-scheme: light;
+	--bg: #fff8fd;
+	--surface: #f4eaff;
+	--border: #cdb7e5;
+	--text: #2b1938;
+	--muted: #685471;
+	--accent: #762d9f;
+	--accent-soft: #ead4ff;
+	--accent-text: #ffffff;
+	--blocker: #a72d54;
+	--blocker-soft: #ffe0ea;
+	--nitpick: #795400;
+	--nitpick-soft: #ffefb8;
+	--done: #17664c;
+	--radius: 20px;
+	--measure: 68ch;
+}
+
+:root[data-theme="unicorn"][data-theme-mode="dark"] {
+	color-scheme: dark;
+	--bg: #160f24;
+	--surface: #28193c;
+	--border: #6b5185;
+	--text: #faefff;
+	--muted: #c7b2d1;
+	--accent: #e4a4ff;
+	--accent-soft: #48285c;
+	--accent-text: #21102b;
+	--blocker: #ff8db7;
+	--blocker-soft: #4b2036;
+	--nitpick: #f2ca70;
+	--nitpick-soft: #46381b;
+	--done: #75dfb4;
+	--radius: 20px;
+	--measure: 68ch;
+}
+
+html[data-theme="unicorn"] body {
+	background-color: var(--bg);
+	background-image:
+		radial-gradient(circle at 12% 12%, rgb(255 91 168 / 16%) 0 5px, transparent 6px),
+		radial-gradient(circle at 88% 20%, rgb(68 201 214 / 16%) 0 7px, transparent 8px),
+		radial-gradient(circle at 70% 82%, rgb(255 195 74 / 14%) 0 6px, transparent 7px),
+		linear-gradient(135deg, rgb(255 192 224 / 14%), transparent 35%, rgb(170 226 255 / 16%) 70%, transparent);
+	background-size: 97px 97px, 131px 131px, 157px 157px, 100% 100%;
+	font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+}
+
+html[data-theme="unicorn"] header {
+	position: relative;
+	border-bottom: 0;
+}
+
+html[data-theme="unicorn"] header::before {
+	content: "🦄";
+	position: absolute;
+	right: 0;
+	top: 2.15rem;
+	font-size: 2rem;
+	filter: drop-shadow(0 3px 0 rgb(118 45 159 / 18%));
+}
+
+html[data-theme="unicorn"] header::after {
+	content: "";
+	display: block;
+	height: 6px;
+	margin-top: 1.4rem;
+	border-radius: 999px;
+	background: linear-gradient(90deg, #d43d79, #d47a22, #9b7900, #198568, #3777bd, #762d9f);
+}
+
+html[data-theme="unicorn"] header h1,
+html[data-theme="unicorn"] .md h1,
+html[data-theme="unicorn"] .md h2,
+html[data-theme="unicorn"] .decide h2 {
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+html[data-theme="unicorn"] .card,
+html[data-theme="unicorn"] details.group,
+html[data-theme="unicorn"] details.ref,
+html[data-theme="unicorn"] figure.diagram,
+html[data-theme="unicorn"] .decide {
+	border-width: 2px;
+	box-shadow: 0 6px 0 rgb(118 45 159 / 18%);
+}
+
+html[data-theme="unicorn"][data-theme-mode="light"] .card:nth-child(3n + 1) { background: #ffe8f3; border-color: #dc91b2; }
+html[data-theme="unicorn"][data-theme-mode="light"] .card:nth-child(3n + 2) { background: #e4f8fa; border-color: #83c7ca; }
+html[data-theme="unicorn"][data-theme-mode="light"] .card:nth-child(3n) { background: #fff2cf; border-color: #dbbd69; }
+html[data-theme="unicorn"][data-theme-mode="dark"] .card:nth-child(3n + 1) { background: #3a1830; border-color: #9d4c77; }
+html[data-theme="unicorn"][data-theme-mode="dark"] .card:nth-child(3n + 2) { background: #12343a; border-color: #3b929b; }
+html[data-theme="unicorn"][data-theme-mode="dark"] .card:nth-child(3n) { background: #382c12; border-color: #a78638; }
+
+html[data-theme="unicorn"][data-theme-mode="light"] details.group > summary {
+	background: linear-gradient(90deg, #ffe5f2, #eee2ff, #ddf5fa);
+}
+
+html[data-theme="unicorn"][data-theme-mode="dark"] details.group > summary {
+	background: linear-gradient(90deg, #3a1830, #302047, #15353d);
+}
+
+html[data-theme="unicorn"][data-theme-mode="light"] figure.diagram {
+	background: linear-gradient(145deg, #f8edff, #e8f7ff);
+}
+
+html[data-theme="unicorn"][data-theme-mode="dark"] figure.diagram {
+	background: linear-gradient(145deg, #2f1d46, #153541);
+}
+
+html[data-theme="unicorn"][data-theme-mode="light"] .decide {
+	background: linear-gradient(145deg, #fff8fc, #f0e6ff);
+}
+
+html[data-theme="unicorn"][data-theme-mode="dark"] .decide {
+	background: linear-gradient(145deg, #2d1b3c, #231a3c);
+}
+
+html[data-theme="unicorn"] button {
+	border: 2px solid #542071;
+	box-shadow: 0 4px 0 #542071, 0 0 0 4px rgb(255 105 180 / 15%);
+}
+
+html[data-theme="unicorn"][data-theme-mode="dark"] button {
+	border-color: #f2c3ff;
+	box-shadow: 0 4px 0 #6f2d88, 0 0 0 4px rgb(255 105 180 / 12%);
+}
+
+html[data-theme="unicorn"] button:active {
+	transform: translateY(3px);
+	box-shadow: 0 1px 0 #542071;
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430">
+  <defs>
+    <filter id="wash" x="-20%" y="-30%" width="140%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency=".012" numOctaves="3" seed="17" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="18"/>
+      <feGaussianBlur stdDeviation="1.8"/>
+    </filter>
+    <linearGradient id="red" x1="0" x2="1">
+      <stop stop-color="#9c2b1b" stop-opacity=".08"/>
+      <stop offset=".55" stop-color="#7e261b" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#58180d" stop-opacity=".2"/>
+    </linearGradient>
+  </defs>
+  <g filter="url(#wash)">
+    <path d="M327 332c93-30 138-98 197-154 48-46 110-73 178-70-34 15-58 36-71 62 70-26 151-20 226 27-76-11-131 5-169 40 65 2 119 24 163 69-82-30-149-28-203 5 49 12 87 38 113 78-80-43-164-54-248-33-74 18-130 15-186-24z" fill="url(#red)"/>
+    <path d="M514 206c-33-70-87-111-166-126 44 33 67 69 71 108-52-44-113-60-183-49 67 22 112 59 135 112-61-25-124-22-190 8 68 3 122 26 162 69" fill="none" stroke="#58180d" stroke-width="22" stroke-linecap="round" opacity=".27"/>
+    <path d="M605 154c31-52 75-89 133-110-18 28-24 57-17 87 32-35 70-52 116-51-37 24-59 55-66 93" fill="#9c2b1b" opacity=".22"/>
+    <path d="M680 174c38-26 78-28 119-8l-39 18 45 20-63 15c-18-8-39-23-62-45z" fill="#58180d" opacity=".48"/>
+    <circle cx="767" cy="179" r="5" fill="#c9ad6a" opacity=".9"/>
+  </g>
+</svg>

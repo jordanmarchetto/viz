@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="420" viewBox="0 0 360 420">
+  <defs><filter id="w"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="8"/><feGaussianBlur stdDeviation=".55"/></filter></defs>
+  <g filter="url(#w)" stroke="#4d3924" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M82 112h158l-18 239c-3 34-116 34-120 0z" fill="#b77b35" fill-opacity=".72" stroke-width="9"/>
+    <path d="M103 145h116M98 210h117M94 281h123" fill="none" stroke-width="7" opacity=".65"/>
+    <path d="M240 154c102-9 104 147-10 143l5-48c51 5 60-53 1-48z" fill="#d2a15b" fill-opacity=".55" stroke-width="10"/>
+    <ellipse cx="161" cy="112" rx="82" ry="23" fill="#efe2bd" stroke-width="8"/>
+    <path d="M94 108c12-57 39-23 55-45 22-30 35 18 51-5 25-37 49 21 37 53-35 17-109 17-143-3z" fill="#f7edcf" stroke="#8a6b42" stroke-width="5"/>
+    <path d="M113 121v222M205 122l-9 224" fill="none" stroke="#fff1ca" stroke-width="5" opacity=".38"/>
+  </g>
+</svg>

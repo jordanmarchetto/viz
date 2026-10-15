@@ -1,0 +1,26 @@
+{
+  "name": "viz",
+  "version": "0.1.0",
+  "description": "Render a JSON page description in the browser, optionally collect decisions, print them to stdout.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "viz": "src/cli.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "demo": "node src/cli.ts < examples/demo.json",
+    "test": "node --test test/*.test.ts"
+  },
+  "dependencies": {
+    "marked": "^14.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "private": true
+}

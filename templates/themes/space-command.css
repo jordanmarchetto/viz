@@ -1,0 +1,206 @@
+:root[data-theme="space-command"][data-theme-mode="independent"] {
+	color-scheme: dark;
+	--bg: #02070c;
+	--surface: #07151e;
+	--border: #1c6980;
+	--text: #cdebf2;
+	--muted: #78a5b1;
+	--accent: #26d9f2;
+	--accent-soft: #0b3541;
+	--accent-text: #001014;
+	--blocker: #ff654f;
+	--blocker-soft: #421c19;
+	--nitpick: #ffc247;
+	--nitpick-soft: #3d3015;
+	--done: #53e09b;
+	--radius: 0;
+	--measure: 76rem;
+}
+
+html[data-theme="space-command"] body {
+	background-color: #02070c;
+	background-image:
+		linear-gradient(rgb(35 178 210 / 7%) 1px, transparent 1px),
+		linear-gradient(90deg, rgb(35 178 210 / 7%) 1px, transparent 1px),
+		radial-gradient(ellipse at 50% -20%, #123548 0, #02070c 58%);
+	background-size: 42px 42px, 42px 42px, auto;
+	background-attachment: fixed;
+	font-family: "Arial Narrow", "Roboto Condensed", "Segoe UI", sans-serif;
+	font-size: 17px;
+	letter-spacing: 0.015em;
+}
+
+html[data-theme="space-command"] header {
+	position: relative;
+	max-width: 72rem;
+	margin: 2rem auto 3rem;
+	padding: 2rem 2.5rem;
+	border: 2px solid #22768d;
+	border-left: 12px solid #ffb52b;
+	background: linear-gradient(100deg, #0b2633, #061018 70%);
+	box-shadow: 0 0 25px #10ccef33, inset 0 0 35px #041018;
+	clip-path: polygon(0 0, calc(100% - 42px) 0, 100% 42px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+}
+html[data-theme="space-command"] header::after {
+	content: "// COMMAND UPLINK ACTIVE";
+	position: absolute;
+	right: 3.5rem;
+	top: 1rem;
+	color: #54dff2;
+	font: 700 0.7rem/1 ui-monospace, monospace;
+	letter-spacing: 0.15em;
+}
+html[data-theme="space-command"] header h1 {
+	font-family: "Arial Narrow", "Roboto Condensed", sans-serif;
+	font-size: clamp(2.5rem, 7vw, 5.4rem);
+	font-weight: 900;
+	line-height: 0.9;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: #e5faff;
+	text-shadow: 0 0 16px #28d9f266;
+}
+html[data-theme="space-command"] header p {
+	margin-top: 1rem;
+	color: #ffbd3c;
+	font-family: ui-monospace, SFMono-Regular, monospace;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+html[data-theme="space-command"] main {
+	max-width: 74rem;
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	gap: 1.4rem;
+}
+html[data-theme="space-command"] main > * {
+	grid-column: 1 / -1;
+	justify-self: center;
+}
+html[data-theme="space-command"] main > .md,
+html[data-theme="space-command"] main > details.group,
+html[data-theme="space-command"] main > details.ref,
+html[data-theme="space-command"] main > figure.diagram,
+html[data-theme="space-command"] main > .decide {
+	position: relative;
+	margin: 0;
+	border: 1px solid #1c6980;
+	border-left: 6px solid #26cde7;
+	background: linear-gradient(135deg, rgb(13 42 54 / 96%), rgb(3 13 20 / 98%));
+	box-shadow: inset 0 0 25px #001018, 0 0 12px #19bad322;
+	clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+html[data-theme="space-command"] main > .md { width: 72%; padding: 1.4rem 1.6rem; }
+html[data-theme="space-command"] .md h1,
+html[data-theme="space-command"] .md h2,
+html[data-theme="space-command"] .md h3,
+html[data-theme="space-command"] .decide h2 {
+	color: #61e8f7;
+	font-family: "Arial Narrow", sans-serif;
+	font-weight: 900;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+html[data-theme="space-command"] .md h2::before,
+html[data-theme="space-command"] .decide h2::before { content: "// "; color: #ffb52b; }
+html[data-theme="space-command"] .md code { background: #001017; border-color: #1c6980; color: #72efff; }
+
+html[data-theme="space-command"] .cards {
+	width: 88%;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.8rem;
+	margin: 0;
+}
+html[data-theme="space-command"] .card {
+	min-height: 9rem;
+	justify-content: space-between;
+	border: 1px solid #23768b;
+	border-top: 5px solid #26cde7;
+	background: linear-gradient(#0a2632, #041118);
+	box-shadow: inset 0 0 18px #001018;
+	clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+html[data-theme="space-command"] .card:nth-child(2) { border-top-color: #ffb52b; }
+html[data-theme="space-command"] .card:nth-child(3) { border-top-color: #6ce5a7; }
+html[data-theme="space-command"] a.card:hover { border-color: #4ee8fa; transform: translateY(-3px); box-shadow: 0 0 15px #25dff266; }
+html[data-theme="space-command"] .card-title { color: #dffbff; text-transform: uppercase; letter-spacing: 0.06em; }
+html[data-theme="space-command"] .card-meta { font-family: ui-monospace, monospace; }
+
+html[data-theme="space-command"] main > details.group { width: 90%; }
+html[data-theme="space-command"] details.group > summary,
+html[data-theme="space-command"] details.ref > summary { background: linear-gradient(90deg, #0b3340, #06131b); }
+html[data-theme="space-command"] details.group[open] > summary,
+html[data-theme="space-command"] details.ref pre { border-color: #1c6980; }
+html[data-theme="space-command"] .group-label { color: #62e7f5; text-transform: uppercase; letter-spacing: 0.08em; }
+html[data-theme="space-command"] .group-body,
+html[data-theme="space-command"] details.ref pre { background: #031018; }
+
+html[data-theme="space-command"] main > figure.diagram { width: 82%; padding: 1.4rem; }
+html[data-theme="space-command"] figure.diagram figcaption {
+	color: #ffbd3c;
+	font-family: ui-monospace, monospace;
+}
+html[data-theme="space-command"] main > details.ref { width: 74%; }
+
+html[data-theme="space-command"] main > .decide { width: 90%; padding: 1.5rem; border-left-color: #ffb52b; }
+html[data-theme="space-command"] .option {
+	border: 1px solid #1c5262;
+	border-left: 4px solid #1c6980;
+	background: #041119;
+}
+html[data-theme="space-command"] .option:hover { border-color: #26d9f2; }
+html[data-theme="space-command"] .option.selected {
+	border-color: #26d9f2;
+	border-left-color: #ffb52b;
+	background: linear-gradient(90deg, #0d3a46, #06141c);
+	box-shadow: inset 8px 0 #ffb52b, 0 0 10px #25dff233;
+	padding-left: calc(0.8rem + 8px);
+}
+html[data-theme="space-command"] .option textarea,
+html[data-theme="space-command"] .note textarea { background: #020a0f; border-color: #1c5262; font-family: ui-monospace, monospace; }
+
+html[data-theme="space-command"] .chip {
+	border: 1px solid currentColor;
+	border-radius: 1px;
+	background: #08202a;
+	font-family: ui-monospace, monospace;
+	clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%);
+}
+
+html[data-theme="space-command"] .bar {
+	background: #030b10;
+	border-top: 2px solid #1c6980;
+	box-shadow: 0 -5px 18px #000;
+}
+html[data-theme="space-command"] .theme-control select {
+	border: 1px solid #25839a;
+	border-radius: 0;
+	background: #071923;
+	font-family: ui-monospace, monospace;
+}
+html[data-theme="space-command"] button {
+	border: 1px solid #42e0f2;
+	border-radius: 0;
+	background: linear-gradient(#29d4e8, #128097);
+	box-shadow: inset 0 0 8px #c9fbff88;
+	font-family: "Arial Narrow", sans-serif;
+	font-weight: 900;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+html[data-theme="space-command"] button.secondary { background: #091b24; color: #60e4f3; border-color: #1c6980; }
+
+@media (max-width: 760px) {
+	html[data-theme="space-command"] body { padding-inline: 0.9rem; }
+	html[data-theme="space-command"] header { padding-inline: 1.3rem; }
+	html[data-theme="space-command"] main { display: flex; }
+	html[data-theme="space-command"] main > *,
+	html[data-theme="space-command"] main > .md,
+	html[data-theme="space-command"] main > details.group,
+	html[data-theme="space-command"] main > details.ref,
+	html[data-theme="space-command"] main > figure.diagram,
+	html[data-theme="space-command"] main > .decide { width: 100%; }
+	html[data-theme="space-command"] .cards { grid-template-columns: 1fr; }
+}

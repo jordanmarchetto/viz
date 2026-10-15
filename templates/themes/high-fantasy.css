@@ -1,0 +1,240 @@
+:root[data-theme="high-fantasy"][data-theme-mode="independent"] {
+	--bg: #173f32;
+	--surface: #f5e7b8;
+	--border: #533719;
+	--text: #2d2415;
+	--muted: #6d5a3d;
+	--accent: #276642;
+	--accent-soft: #cfe0b1;
+	--accent-text: #fff5cf;
+	--blocker: #a13b2e;
+	--blocker-soft: #edc0aa;
+	--nitpick: #7b5a00;
+	--nitpick-soft: #efd98b;
+	--done: #347047;
+	--radius: 18px;
+	--measure: 72rem;
+	--fantasy-castle: url("{{asset:high-fantasy/castle.svg}}");
+	--fantasy-dragon: url("{{asset:high-fantasy/dragon.svg}}");
+	--fantasy-shield: url("{{asset:high-fantasy/shield.svg}}");
+	--fantasy-tree: url("{{asset:high-fantasy/tree.svg}}");
+	--fantasy-mountains: url("{{asset:high-fantasy/mountains.svg}}");
+}
+
+html[data-theme="high-fantasy"] body {
+	background-color: #102f27;
+	background-image:
+		radial-gradient(circle at 18% 9%, #fff1a9 0 2px, transparent 3px),
+		radial-gradient(circle at 72% 16%, #fff1a9 0 1px, transparent 2px),
+		radial-gradient(circle at 88% 7%, #fff1a9 0 1.5px, transparent 2.5px),
+		radial-gradient(ellipse at 50% 112%, #84aa50 0 20%, #426d3c 20.5% 34%, transparent 34.5%),
+		linear-gradient(#183d38 0, #315e50 42%, #1f4a35 72%, #102f27);
+	background-size: 83px 71px, 113px 89px, 151px 97px, auto, auto;
+	background-attachment: fixed;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 18px;
+}
+
+html[data-theme="high-fantasy"][data-art-variant="0"] { --fantasy-header-art: var(--fantasy-castle); --fantasy-content-art: var(--fantasy-tree); }
+html[data-theme="high-fantasy"][data-art-variant="1"] { --fantasy-header-art: var(--fantasy-dragon); --fantasy-content-art: var(--fantasy-shield); }
+html[data-theme="high-fantasy"][data-art-variant="2"] { --fantasy-header-art: var(--fantasy-tree); --fantasy-content-art: var(--fantasy-mountains); }
+html[data-theme="high-fantasy"][data-art-variant="3"] { --fantasy-header-art: var(--fantasy-shield); --fantasy-content-art: var(--fantasy-dragon); }
+html[data-theme="high-fantasy"][data-art-variant="4"] { --fantasy-header-art: var(--fantasy-mountains); --fantasy-content-art: var(--fantasy-castle); }
+
+html[data-theme="high-fantasy"] header {
+	position: relative;
+	max-width: 66rem;
+	margin: 2.5rem auto 4rem;
+	min-height: 17rem;
+	padding: 3.2rem 22rem 3rem 3rem;
+	border: 4px solid #6b451e;
+	border-radius: 48% 48% 2rem 2rem / 2.3rem 2.3rem 2rem 2rem;
+	background-color: #1e503c;
+	background-image: radial-gradient(circle at 50% 120%, #3f7a4c, transparent 65%), linear-gradient(120deg, #143c31, #286247 55%, #12352c);
+	box-shadow: 0 0 0 6px #d5a83f, 0 0 0 10px #533719, 0 18px 35px #081a13dd, inset 0 0 35px #071b14;
+	color: #f8e4a2;
+	text-align: center;
+}
+html[data-theme="high-fantasy"] header::before,
+html[data-theme="high-fantasy"] header::after {
+	content: "❧";
+	position: absolute;
+	top: 50%;
+	color: #e5c465;
+	font-size: 2.7rem;
+}
+html[data-theme="high-fantasy"] header::before { left: 1.2rem; transform: rotate(-30deg); }
+html[data-theme="high-fantasy"] header::after { right: 1.2rem; transform: scaleX(-1) rotate(-30deg); }
+html[data-theme="high-fantasy"] .theme-art {
+	display: block;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	filter: drop-shadow(0 8px 5px #071b1488);
+	pointer-events: none;
+}
+html[data-theme="high-fantasy"] .header-art {
+	position: absolute;
+	right: 3.2rem;
+	bottom: 1rem;
+	width: 18rem;
+	height: 15rem;
+	background-image: var(--fantasy-header-art);
+	opacity: 0.92;
+}
+html[data-theme="high-fantasy"] .content-art {
+	align-self: center;
+	position: relative;
+	z-index: 2;
+	width: 20rem;
+	height: 13rem;
+	margin: -2.6rem auto -3.3rem;
+	background-image: var(--fantasy-content-art);
+}
+html[data-theme="high-fantasy"] header h1,
+html[data-theme="high-fantasy"] header p { position: relative; z-index: 1; }
+html[data-theme="high-fantasy"] header h1 {
+	font-size: clamp(2.6rem, 7vw, 5.6rem);
+	line-height: 0.92;
+	letter-spacing: -0.045em;
+	color: #f6dda0;
+	text-shadow: 0 3px #513513, 0 0 16px #ffd96b55;
+}
+html[data-theme="high-fantasy"] header p {
+	margin-top: 1rem;
+	color: #e7cc87;
+	font-style: italic;
+	font-size: 1.08rem;
+}
+
+html[data-theme="high-fantasy"] main {
+	max-width: 70rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.7rem;
+}
+html[data-theme="high-fantasy"] main > .md,
+html[data-theme="high-fantasy"] main > details.group,
+html[data-theme="high-fantasy"] main > details.ref,
+html[data-theme="high-fantasy"] main > figure.diagram,
+html[data-theme="high-fantasy"] main > .decide {
+	position: relative;
+	align-self: stretch;
+	width: 100%;
+	margin: 0;
+	border: 3px solid #65451f;
+	border-radius: 1rem;
+	background-color: #f5e7b8;
+	background-image: radial-gradient(circle at 15% 20%, #fff8d6aa, transparent 20rem), repeating-linear-gradient(5deg, transparent 0 7px, #79531e0a 8px);
+	box-shadow: 0 0 0 4px #d1a440, 7px 10px 20px #102a1dbb, inset 0 0 25px #75502222;
+	transform: none;
+}
+html[data-theme="high-fantasy"] main > .md { padding: 1.6rem 2rem; }
+html[data-theme="high-fantasy"] .md h1,
+html[data-theme="high-fantasy"] .md h2,
+html[data-theme="high-fantasy"] .md h3,
+html[data-theme="high-fantasy"] .decide h2 {
+	color: #315f3c;
+	letter-spacing: 0.015em;
+}
+html[data-theme="high-fantasy"] main > .md h2::before,
+html[data-theme="high-fantasy"] .decide h2::before { content: "❦ "; color: #b48320; }
+html[data-theme="high-fantasy"] main > .md h2::after,
+html[data-theme="high-fantasy"] .decide h2::after { content: " ❧"; color: #b48320; }
+html[data-theme="high-fantasy"] .md strong { color: #7d4a13; }
+html[data-theme="high-fantasy"] .md code { background: #e8d39a; border-color: #9d7737; }
+
+html[data-theme="high-fantasy"] .cards { gap: 1.2rem; margin: 0; }
+html[data-theme="high-fantasy"] .card {
+	min-height: 9.5rem;
+	justify-content: space-between;
+	padding: 1.1rem;
+	border: 3px solid #65451f;
+	border-radius: 50% 50% 1rem 1rem / 1.6rem 1.6rem 1rem 1rem;
+	background: linear-gradient(#fff3c8, #ddc17e);
+	box-shadow: 0 0 0 3px #d1a440, 5px 8px 16px #102a1dbb;
+}
+html[data-theme="high-fantasy"] .card:nth-child(2) { background: linear-gradient(#dce8b9, #a9c376); }
+html[data-theme="high-fantasy"] .card:nth-child(3) { background: linear-gradient(#e6d2ae, #c79762); }
+html[data-theme="high-fantasy"] a.card:hover { border-color: #f3cc62; transform: translateY(-4px); }
+html[data-theme="high-fantasy"] .card-title { color: #315f3c; font-size: 1.25rem; }
+html[data-theme="high-fantasy"] .card-meta { color: #5f4b2e; }
+
+html[data-theme="high-fantasy"] main > details.group { overflow: visible; }
+html[data-theme="high-fantasy"] details.group > summary {
+	padding: 1.1rem 1.4rem;
+	border-radius: 0.75rem 0.75rem 0 0;
+	background: linear-gradient(100deg, #40764a, #28583a);
+	color: #fff0b5;
+}
+html[data-theme="high-fantasy"] details.group[open] > summary { border-bottom: 3px solid #65451f; }
+html[data-theme="high-fantasy"] .group-head::before,
+html[data-theme="high-fantasy"] .group-meta { color: #eedb9b; }
+html[data-theme="high-fantasy"] .group-link { color: #fff0b5; font-weight: 700; text-decoration: underline; }
+html[data-theme="high-fantasy"] .group-body { padding: 0.3rem 1.5rem 0.8rem; }
+
+html[data-theme="high-fantasy"] main > figure.diagram { padding: 1.5rem; }
+html[data-theme="high-fantasy"] figure.diagram figcaption { color: #315f3c; font-size: 0.95rem; }
+
+html[data-theme="high-fantasy"] main > details.ref { overflow: hidden; }
+html[data-theme="high-fantasy"] details.ref > summary { background: #e6cf91; }
+html[data-theme="high-fantasy"] details.ref pre { border-top: 3px solid #65451f; background: #ead7a4; }
+
+html[data-theme="high-fantasy"] main > .decide { padding: 1.7rem; }
+html[data-theme="high-fantasy"] .option {
+	border: 2px solid #8f6a30;
+	border-radius: 999px;
+	background: #ead7a4;
+}
+html[data-theme="high-fantasy"] .option:hover { border-color: #347047; }
+html[data-theme="high-fantasy"] .option.selected {
+	border-color: #347047;
+	background: #cfe0b1;
+	box-shadow: inset 8px 0 #d4a536;
+	padding-left: calc(0.8rem + 8px);
+}
+html[data-theme="high-fantasy"] .option.other { padding: 1rem 1.75rem 1.15rem; }
+html[data-theme="high-fantasy"] .option textarea,
+html[data-theme="high-fantasy"] .note textarea { background: #fff1c3; border-color: #8f6a30; }
+
+html[data-theme="high-fantasy"] .chip {
+	border: 2px solid #65451f;
+	box-shadow: 2px 2px 0 #b98b32;
+	font-family: Georgia, serif;
+}
+
+html[data-theme="high-fantasy"] .bar {
+	background: linear-gradient(#315f3c, #173f32);
+	border-top: 4px solid #d1a440;
+	box-shadow: 0 -5px 18px #102a1d99;
+}
+html[data-theme="high-fantasy"] .progress,
+html[data-theme="high-fantasy"] .progress strong,
+html[data-theme="high-fantasy"] .theme-control { color: #f5e7b8; }
+html[data-theme="high-fantasy"] .theme-control select {
+	border: 2px solid #d1a440;
+	background: #f5e7b8;
+	color: #2d2415;
+	font-family: Georgia, serif;
+}
+html[data-theme="high-fantasy"] button {
+	border: 2px solid #f0cf67;
+	border-radius: 999px;
+	background: linear-gradient(#4c8754, #28603d);
+	box-shadow: 0 3px 0 #513513;
+	font-family: Georgia, serif;
+	font-weight: 700;
+}
+html[data-theme="high-fantasy"] button.secondary { background: #f5e7b8; color: #315f3c; border-color: #d1a440; }
+
+@media (max-width: 650px) {
+	html[data-theme="high-fantasy"] body { padding-inline: 0.9rem; }
+	html[data-theme="high-fantasy"] header { min-height: 21rem; padding: 2.2rem 2.4rem 10rem; }
+	html[data-theme="high-fantasy"] .header-art { right: 50%; bottom: 0.4rem; width: 14rem; height: 10rem; transform: translateX(50%); opacity: 0.72; }
+	html[data-theme="high-fantasy"] .content-art { width: 13rem; height: 9rem; margin-block: -2rem -2.8rem; }
+	html[data-theme="high-fantasy"] main > .md,
+	html[data-theme="high-fantasy"] main > details.group,
+	html[data-theme="high-fantasy"] main > details.ref,
+	html[data-theme="high-fantasy"] main > figure.diagram,
+	html[data-theme="high-fantasy"] main > .decide { width: 100%; }
+}

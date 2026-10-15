@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="430" viewBox="0 0 320 430">
+  <defs><filter id="w"><feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="3" seed="29" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="7"/></filter><linearGradient id="p" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9f4e91"/><stop offset="1" stop-color="#58180d"/></linearGradient></defs>
+  <g filter="url(#w)" stroke="#473424" stroke-linejoin="round">
+    <path d="M111 43h98v53l-22 27v43c60 40 88 91 76 153-17 89-189 89-206 0-12-62 16-113 76-153v-43l-22-27z" fill="#f5e8c6" fill-opacity=".74" stroke-width="9"/>
+    <path d="M66 276c51-42 136-42 188 0 11 92-177 118-188 0z" fill="url(#p)" fill-opacity=".78" stroke-width="5"/>
+    <path d="M105 43h110v53H105z" fill="#916b3d" stroke-width="8"/>
+    <path d="M126 135h68" stroke="#fff9dc" stroke-width="8" opacity=".65"/>
+    <circle cx="119" cy="287" r="13" fill="#d9a5d0" opacity=".8"/><circle cx="176" cy="322" r="9" fill="#d9a5d0" opacity=".7"/><circle cx="209" cy="276" r="6" fill="#fff1cf" opacity=".8"/>
+  </g>
+</svg>

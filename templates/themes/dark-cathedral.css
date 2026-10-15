@@ -1,0 +1,267 @@
+:root[data-theme="dark-cathedral"][data-theme-mode="independent"] {
+	color-scheme: dark;
+	--bg: #070605;
+	--surface: #15110e;
+	--border: #514130;
+	--text: #d1c3ad;
+	--muted: #8d7c67;
+	--accent: #bd3827;
+	--accent-soft: #35120f;
+	--accent-text: #f0dfc3;
+	--blocker: #df4932;
+	--blocker-soft: #3b100d;
+	--nitpick: #b39152;
+	--nitpick-soft: #332917;
+	--done: #72905b;
+	--radius: 0;
+	--measure: 72rem;
+	--cathedral: url("{{asset:dark-cathedral/cathedral.svg}}");
+	--cathedral-skull: url("{{asset:dark-cathedral/skull.svg}}");
+	--cathedral-rune: url("{{asset:dark-cathedral/rune.svg}}");
+	--cathedral-sword: url("{{asset:dark-cathedral/sword.svg}}");
+	--cathedral-book: url("{{asset:dark-cathedral/chained-book.svg}}");
+	--cathedral-raven: url("{{asset:dark-cathedral/raven.svg}}");
+	--cathedral-arch: url("{{asset:dark-cathedral/arch.svg}}");
+}
+
+html[data-theme="dark-cathedral"] body {
+	background-color: #070605;
+	background-image:
+		radial-gradient(ellipse at 50% 0, #35120f 0, #130b09 26%, transparent 56%),
+		radial-gradient(ellipse at 50% 105%, #5b130d 0, #170a08 23%, transparent 51%),
+		repeating-linear-gradient(93deg, transparent 0 87px, #8f745308 88px 89px),
+		linear-gradient(135deg, #050403, #100d0a 47%, #050403);
+	background-attachment: fixed;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 18px;
+}
+
+html[data-theme="dark-cathedral"][data-art-variant="0"] { --cathedral-header-art: var(--cathedral); --cathedral-content-art: var(--cathedral-skull); }
+html[data-theme="dark-cathedral"][data-art-variant="1"] { --cathedral-header-art: var(--cathedral-skull); --cathedral-content-art: var(--cathedral-rune); }
+html[data-theme="dark-cathedral"][data-art-variant="2"] { --cathedral-header-art: var(--cathedral-arch); --cathedral-content-art: var(--cathedral-sword); }
+html[data-theme="dark-cathedral"][data-art-variant="3"] { --cathedral-header-art: var(--cathedral-raven); --cathedral-content-art: var(--cathedral-book); }
+html[data-theme="dark-cathedral"][data-art-variant="4"] { --cathedral-header-art: var(--cathedral-sword); --cathedral-content-art: var(--cathedral-raven); }
+html[data-theme="dark-cathedral"][data-art-variant="5"] { --cathedral-header-art: var(--cathedral-rune); --cathedral-content-art: var(--cathedral-arch); }
+
+html[data-theme="dark-cathedral"] header {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	max-width: 67rem;
+	min-height: 24rem;
+	margin: 1.8rem auto 4.5rem;
+	padding: 7.4rem 3rem 3.5rem;
+	border: 1px solid #887050;
+	border-top: 7px solid #2c2119;
+	border-bottom: 7px solid #2c2119;
+	background: radial-gradient(ellipse at 50% 42%, #38110dd9, #0a0807 67%);
+	box-shadow: 0 0 0 4px #050403, 0 0 0 6px #493a2b, 0 26px 55px #000, inset 0 0 70px #000;
+	text-align: center;
+}
+html[data-theme="dark-cathedral"] header::before,
+html[data-theme="dark-cathedral"] header::after {
+	content: "";
+	position: absolute;
+	z-index: 2;
+	top: -1px;
+	bottom: -1px;
+	width: 7rem;
+	border: solid #6d5840;
+	border-width: 0 1px;
+	background: linear-gradient(90deg, #090706, #211711 50%, #090706);
+	box-shadow: inset 0 0 25px #000;
+}
+html[data-theme="dark-cathedral"] header::before { left: 0; clip-path: polygon(0 0, 100% 0, 76% 100%, 0 100%); }
+html[data-theme="dark-cathedral"] header::after { right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 24% 100%); }
+html[data-theme="dark-cathedral"] .theme-art {
+	display: block;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	pointer-events: none;
+}
+html[data-theme="dark-cathedral"] .header-art {
+	position: absolute;
+	z-index: 1;
+	inset: -2.5rem 7rem -3rem;
+	background-image: var(--cathedral-header-art);
+	filter: drop-shadow(0 0 18px #7d1c14aa);
+	opacity: 0.68;
+}
+html[data-theme="dark-cathedral"] .content-art {
+	position: relative;
+	z-index: 3;
+	align-self: center;
+	width: 19rem;
+	height: 16rem;
+	margin: -4.5rem auto -5rem;
+	background-image: var(--cathedral-content-art);
+	filter: drop-shadow(0 12px 8px #000);
+	opacity: 0.94;
+}
+html[data-theme="dark-cathedral"] header h1 {
+	position: relative;
+	z-index: 3;
+	margin: 0;
+	color: #d4c1a4;
+	font-size: clamp(3rem, 8vw, 6.4rem);
+	font-weight: 500;
+	line-height: 0.83;
+	letter-spacing: 0.055em;
+	text-transform: uppercase;
+	text-shadow: 0 3px 0 #000, 0 0 14px #ae2b1e, 0 0 45px #6b160f;
+}
+html[data-theme="dark-cathedral"] header h1::after {
+	content: "";
+	display: block;
+	width: min(32rem, 70%);
+	height: 2px;
+	margin: 1.2rem auto;
+	background: linear-gradient(90deg, transparent, #a38459, #b72f20, #a38459, transparent);
+	box-shadow: 0 0 9px #a72a1d;
+}
+html[data-theme="dark-cathedral"] header p {
+	position: relative;
+	z-index: 3;
+	max-width: 38rem;
+	margin: 0 auto;
+	color: #a99880;
+	font-size: 0.95rem;
+	font-style: italic;
+	letter-spacing: 0.08em;
+}
+
+html[data-theme="dark-cathedral"] main { max-width: 68rem; display: flex; flex-direction: column; gap: 2rem; }
+html[data-theme="dark-cathedral"] main > .md,
+html[data-theme="dark-cathedral"] main > details.group,
+html[data-theme="dark-cathedral"] main > details.ref,
+html[data-theme="dark-cathedral"] main > figure.diagram,
+html[data-theme="dark-cathedral"] main > figure.data-table,
+html[data-theme="dark-cathedral"] main > .decide {
+	position: relative;
+	margin: 0;
+	border: 1px solid #67513a;
+	background:
+		linear-gradient(135deg, #21191466 0 1px, transparent 1px 10px),
+		linear-gradient(150deg, #1b1511, #0b0908 72%);
+	box-shadow: 0 0 0 3px #050403, 0 0 0 4px #32271e, 0 15px 35px #000d, inset 0 0 35px #000;
+}
+html[data-theme="dark-cathedral"] main > .md::before,
+html[data-theme="dark-cathedral"] main > .decide::before {
+	content: "◆";
+	position: absolute;
+	top: -0.9rem;
+	left: 50%;
+	width: 1.7rem;
+	height: 1.7rem;
+	transform: translateX(-50%) rotate(45deg);
+	border: 1px solid #816745;
+	background: #1b0d0a;
+	color: #c13a27;
+	font-size: 0.75rem;
+	line-height: 1.5rem;
+	text-align: center;
+	text-shadow: 0 0 7px #e4452e;
+}
+html[data-theme="dark-cathedral"] main > .md { padding: 2rem 2.2rem; }
+html[data-theme="dark-cathedral"] .md h1,
+html[data-theme="dark-cathedral"] .md h2,
+html[data-theme="dark-cathedral"] .md h3,
+html[data-theme="dark-cathedral"] .decide h2 {
+	color: #c5a66f;
+	font-weight: 500;
+	font-variant: small-caps;
+	letter-spacing: 0.09em;
+	text-shadow: 0 2px #000;
+}
+html[data-theme="dark-cathedral"] .md h2 { border-bottom: 1px solid #523d2c; padding-bottom: 0.45rem; }
+html[data-theme="dark-cathedral"] .md strong { color: #d74931; }
+html[data-theme="dark-cathedral"] .md a { color: #ce694f; }
+html[data-theme="dark-cathedral"] .md code { border-color: #49372a; background: #050403; color: #c7a86e; }
+html[data-theme="dark-cathedral"] .md blockquote { border-left-color: #8e281d; color: #a99880; }
+
+html[data-theme="dark-cathedral"] .cards { gap: 1.2rem; margin: 0; }
+html[data-theme="dark-cathedral"] .card {
+	min-height: 10rem;
+	justify-content: space-between;
+	border: 1px solid #5c4936;
+	border-top: 4px solid #2b2119;
+	border-radius: 0;
+	background: radial-gradient(circle at 50% 110%, #32100c, transparent 56%), linear-gradient(#18130f, #090706);
+	box-shadow: 0 0 0 3px #050403, inset 0 0 28px #000, 0 10px 24px #000b;
+}
+html[data-theme="dark-cathedral"] .card:nth-child(3n + 1) { border-color: #806f39; }
+html[data-theme="dark-cathedral"] .card:nth-child(3n + 2) { border-color: #6a8b99; }
+html[data-theme="dark-cathedral"] .card:nth-child(3n) { border-color: #9b5d2b; }
+html[data-theme="dark-cathedral"] a.card:hover { transform: translateY(-3px); border-color: #bd3827; box-shadow: 0 0 0 3px #050403, 0 0 19px #a72c1e66; }
+html[data-theme="dark-cathedral"] .card-title { color: #c5a66f; font-size: 1.25rem; font-variant: small-caps; letter-spacing: 0.06em; }
+
+html[data-theme="dark-cathedral"] details.group > summary,
+html[data-theme="dark-cathedral"] details.ref > summary {
+	border-bottom: 1px solid #4c392a;
+	background: linear-gradient(90deg, #2a110d, #17110e 40%, #0b0908);
+}
+html[data-theme="dark-cathedral"] .group-label { color: #c5a66f; font-variant: small-caps; letter-spacing: 0.07em; }
+html[data-theme="dark-cathedral"] .group-body,
+html[data-theme="dark-cathedral"] details.ref pre { background: #090706; }
+html[data-theme="dark-cathedral"] details.ref pre { border-color: #4c392a; color: #b9aa94; }
+
+html[data-theme="dark-cathedral"] figure.diagram { padding: 1.6rem; background: radial-gradient(circle, #24100d, #080706 72%); }
+html[data-theme="dark-cathedral"] figure.diagram figcaption { color: #c5a66f; }
+
+html[data-theme="dark-cathedral"] figure.data-table { overflow: hidden; }
+html[data-theme="dark-cathedral"] figure.data-table figcaption {
+	border-bottom: 1px solid #765b3d;
+	background: #0a0807;
+	color: #c5a66f;
+	font-family: Georgia, serif;
+	font-variant: small-caps;
+	letter-spacing: 0.1em;
+}
+html[data-theme="dark-cathedral"] figure.data-table th { border-color: #6f261d; background: linear-gradient(#531a14, #250d0a); color: #dbc4a0; }
+html[data-theme="dark-cathedral"] figure.data-table td { border-color: #382a20; }
+html[data-theme="dark-cathedral"] figure.data-table tbody tr:nth-child(odd) { background: #17110e; }
+html[data-theme="dark-cathedral"] figure.data-table tbody tr:nth-child(even) { background: #0b0908; }
+html[data-theme="dark-cathedral"] figure.data-table td:first-child { color: #c5a66f; }
+
+html[data-theme="dark-cathedral"] .decide { padding: 2rem; }
+html[data-theme="dark-cathedral"] .option {
+	border: 1px solid #4f3c2d;
+	border-left: 4px solid #4f3c2d;
+	border-radius: 0;
+	background: #090706;
+}
+html[data-theme="dark-cathedral"] .option:hover { border-color: #9c3023; }
+html[data-theme="dark-cathedral"] .option.selected {
+	border-color: #b83b29;
+	background: linear-gradient(90deg, #40130f, #100a08 58%);
+	box-shadow: inset 8px 0 #aa8753, 0 0 13px #a52d2055;
+}
+html[data-theme="dark-cathedral"] .option textarea,
+html[data-theme="dark-cathedral"] .note textarea { border-color: #4f3c2d; border-radius: 0; background: #050403; color: #d1c3ad; }
+html[data-theme="dark-cathedral"] .chip { border: 1px solid #775a3d; border-radius: 0; background: #170d0a; font-family: Georgia, serif; box-shadow: inset 0 0 8px #000; }
+
+html[data-theme="dark-cathedral"] .bar { border-top: 4px double #6b5136; background: #070605; box-shadow: 0 -9px 24px #000; }
+html[data-theme="dark-cathedral"] .theme-control select { border: 1px solid #6b5136; border-radius: 0; background: #15100d; color: #d1c3ad; font-family: Georgia, serif; }
+html[data-theme="dark-cathedral"] button {
+	border: 1px solid #9c4937;
+	border-radius: 0;
+	background: linear-gradient(#732318, #35100c);
+	box-shadow: inset 0 0 8px #d86a3c44, 0 3px 0 #150504;
+	color: #ead5b3;
+	font-family: Georgia, serif;
+	font-variant: small-caps;
+	letter-spacing: 0.08em;
+}
+html[data-theme="dark-cathedral"] button.secondary { border-color: #67513a; background: #17110e; color: #c5a66f; }
+
+@media (max-width: 650px) {
+	html[data-theme="dark-cathedral"] body { padding-inline: 0.85rem; }
+	html[data-theme="dark-cathedral"] header { min-height: 21rem; margin-top: 1.2rem; padding: 6rem 1.3rem 2rem; }
+	html[data-theme="dark-cathedral"] header::before,
+	html[data-theme="dark-cathedral"] header::after { width: 2.4rem; }
+	html[data-theme="dark-cathedral"] .header-art { inset-inline: 1.5rem; opacity: 0.5; }
+	html[data-theme="dark-cathedral"] .content-art { width: 13rem; height: 11rem; margin-block: -3.4rem -3.7rem; }
+	html[data-theme="dark-cathedral"] main > .md,
+	html[data-theme="dark-cathedral"] .decide { padding-inline: 1.2rem; }
+}

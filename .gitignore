@@ -1,0 +1,13 @@
+# Working notes, never committed
+scratch/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Rendered pages, if ever written inside the repo
+.viz/
+
+# OS
+.DS_Store

@@ -1,0 +1,39 @@
+{
+  "title": "viz block vocabulary — round 2",
+  "subtitle": "3 questions on the frontier",
+  "blocks": [
+    {
+      "type": "md",
+      "text": "**Round 1 settled:** one-shot pages, hybrid block typing, CLI rather than an extension, and the tool lives in its own repo."
+    },
+    {
+      "type": "diagram",
+      "label": "Design tree so far",
+      "text": "flowchart TD\n    A[viz] --> B[shape: CLI]\n    A --> C[page lifetime: one-shot]\n    A --> D[block typing: hybrid]\n    B --> E{input path?}\n    B --> F{output shape?}\n    D --> G{how does the model learn the schema?}\n    style B fill:#d8f5e3,stroke:#1d7a4c\n    style C fill:#d8f5e3,stroke:#1d7a4c\n    style D fill:#d8f5e3,stroke:#1d7a4c\n    style E fill:#fdf4e0,stroke:#8a6200\n    style F fill:#fdf4e0,stroke:#8a6200\n    style G fill:#fdf4e0,stroke:#8a6200"
+    },
+    {
+      "type": "decide",
+      "id": "q1",
+      "title": "How does the page description get into viz?",
+      "body": "Three options.\n\n**Heredoc on stdin** — one bash call, nothing left on disk. The quoted delimiter means no shell interpolation, so backticks and `$` in the JSON are safe.\n\n**Temp file** — the model writes the JSON with its file tool, then runs `viz <file>`. Two tool calls, and litter to clean up, but the JSON is inspectable afterwards.\n\n**Argument** — `viz '{...}'`. Simplest to type, but long JSON on a command line hits argument length limits and quoting problems.",
+      "options": ["Heredoc on stdin", "Temp file", "Command-line argument"],
+      "recommend": "Heredoc on stdin"
+    },
+    {
+      "type": "decide",
+      "id": "q2",
+      "title": "What does viz print back?",
+      "body": "The output is read by a model, not parsed by a program.\n\n**Compact lines** (`q1: Heredoc on stdin`) are cheap and unambiguous.\n\n**JSON** is machine-readable but costs more tokens and invites the model to re-emit it.",
+      "options": ["Compact lines", "JSON", "JSON behind a flag, lines by default"],
+      "recommend": "Compact lines"
+    },
+    {
+      "type": "decide",
+      "id": "q3",
+      "title": "How does the model learn the block schema?",
+      "body": "viz is a CLI, so there is no automatic schema discovery the way an MCP server would have.\n\n**Inline in each skill** — every skill carries its own example. Duplicated, but each one is tuned to that skill.\n\n**A shared reference file** the skills point at. One source of truth, one more file to read.\n\n**`viz --help`** — the model runs it when unsure. Zero standing cost, but an extra round trip.",
+      "options": ["Inline in each skill", "A shared reference file", "viz --help on demand"],
+      "recommend": "Inline in each skill"
+    }
+  ]
+}

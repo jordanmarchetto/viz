@@ -1,0 +1,460 @@
+/* Functional baseline for every viz component. Theme files may override any
+   presentation while preserving content and interaction behavior. */
+
+* { box-sizing: border-box; }
+
+body {
+	margin: 0;
+	padding: 0 1.5rem 8rem;
+	background: var(--bg);
+	color: var(--text);
+	font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+main { max-width: var(--measure); margin: 0 auto; }
+.theme-art { display: none; }
+
+/* ---- header ---- */
+
+header {
+	max-width: var(--measure);
+	margin: 0 auto;
+	padding: 2.5rem 0 1.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+header h1 { margin: 0; font-size: 1.6rem; line-height: 1.25; letter-spacing: -0.01em; }
+header p { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.95rem; }
+
+/* ---- markdown blocks ---- */
+
+.md { margin: 1.75rem 0; }
+.md > :first-child { margin-top: 0; }
+.md > :last-child { margin-bottom: 0; }
+.md h1, .md h2, .md h3 { line-height: 1.3; margin: 2rem 0 0.75rem; letter-spacing: -0.01em; }
+.md h1 { font-size: 1.35rem; }
+.md h2 { font-size: 1.15rem; }
+.md h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.md p, .md li { margin: 0.65rem 0; }
+.md ul, .md ol { padding-left: 1.3rem; }
+.md a { color: var(--accent); }
+.md code {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	padding: 0.1em 0.35em;
+	font-size: 0.875em;
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.md pre {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 0.9rem 1rem;
+	overflow-x: auto;
+	font-size: 0.85rem;
+	line-height: 1.5;
+}
+.md pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+.md table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+.md th, .md td { border: 1px solid var(--border); padding: 0.45rem 0.7rem; text-align: left; }
+.md th { background: var(--surface); font-weight: 600; }
+.md blockquote {
+	margin: 1rem 0;
+	padding: 0.1rem 0 0.1rem 1rem;
+	border-left: 3px solid var(--border);
+	color: var(--muted);
+}
+
+/* ---- data tables ---- */
+
+figure.data-table {
+	margin: 1.75rem 0;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--surface);
+	overflow: hidden;
+}
+figure.data-table figcaption {
+	padding: 0.7rem 1rem;
+	border-bottom: 1px solid var(--border);
+	color: var(--muted);
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+.table-scroll { overflow-x: auto; }
+figure.data-table table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+figure.data-table th,
+figure.data-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--border); text-align: left; }
+figure.data-table th { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+figure.data-table tbody tr:last-child td { border-bottom: 0; }
+figure.data-table tbody tr:nth-child(even) { background: color-mix(in srgb, var(--surface) 72%, var(--bg)); }
+
+/* ---- cards ---- */
+
+/* auto-fill + minmax: as many columns as fit, each at least 14rem, so the grid
+   reflows on a narrow window without a media query. */
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+	gap: 0.6rem;
+	margin: 1.75rem 0;
+}
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.3rem;
+	padding: 0.8rem 0.9rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--surface);
+	text-decoration: none;
+	color: var(--text);
+	transition: border-color 0.12s, transform 0.12s;
+}
+a.card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.card-title { font-weight: 650; font-size: 0.98rem; line-height: 1.3; }
+.card-meta { color: var(--muted); font-size: 0.82rem; }
+
+/* ---- groups ---- */
+
+details.group {
+	margin: 1.25rem 0;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--bg);
+	overflow: hidden;
+}
+details.group > summary {
+	cursor: pointer;
+	padding: 0.85rem 1rem;
+	background: var(--surface);
+	list-style: none;
+}
+details.group > summary::-webkit-details-marker { display: none; }
+details.group[open] > summary { border-bottom: 1px solid var(--border); }
+.group-head { display: flex; align-items: center; gap: 0.6rem; }
+.group-head::before { content: "▸"; color: var(--muted); font-size: 0.8em; }
+details.group[open] .group-head::before { content: "▾"; }
+.group-label { font-weight: 650; font-size: 1rem; }
+.group-link {
+	margin-left: auto;
+	color: var(--accent);
+	text-decoration: none;
+	font-size: 0.8rem;
+	white-space: nowrap;
+}
+.group-link:hover { text-decoration: underline; }
+.group-meta {
+	display: block;
+	margin-top: 0.25rem;
+	padding-left: 1.1rem;
+	color: var(--muted);
+	font-size: 0.82rem;
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.group-body { padding: 0 1.1rem; }
+/* Blocks set their own vertical rhythm for a full-width page; inside a group
+   that spacing is too loose, so tighten the first and last child. */
+.group-body > :first-child { margin-top: 1rem; }
+.group-body > :last-child { margin-bottom: 1rem; }
+
+/* ---- ref blocks ---- */
+
+details.ref {
+	margin: 1.75rem 0;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--surface);
+	overflow: hidden;
+}
+details.ref > summary {
+	cursor: pointer;
+	padding: 0.7rem 1rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+	list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+details.ref > summary::-webkit-details-marker { display: none; }
+details.ref > summary::before { content: "▸"; color: var(--muted); font-size: 0.8em; }
+details.ref[open] > summary::before { content: "▾"; }
+details.ref > summary .hint {
+	margin-left: auto;
+	font-weight: 400;
+	color: var(--muted);
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+	font-size: 0.8rem;
+}
+details.ref pre {
+	margin: 0;
+	padding: 0.9rem 1rem;
+	border-top: 1px solid var(--border);
+	background: var(--bg);
+	overflow-x: auto;
+	font-size: 0.82rem;
+	line-height: 1.5;
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+details.ref .placeholder { padding: 0.9rem 1rem; color: var(--muted); font-size: 0.9rem; }
+
+/* Unified-diff colouring. Only three distinctions matter when scanning:
+   what was added, what was removed, and where each hunk starts. */
+pre.diff {
+	/* Wrap long lines instead of scrolling sideways. Horizontal scrolling in a
+	   diff means you stop reading it. */
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+pre.diff .add { color: var(--done); }
+pre.diff .del { color: var(--blocker); }
+pre.diff .hunk { color: var(--accent); font-weight: 600; }
+pre.diff .meta { color: var(--muted); }
+pre.diff .add, pre.diff .del { display: inline-block; width: 100%; }
+pre.diff .add { background: color-mix(in srgb, var(--done) 9%, transparent); }
+pre.diff .del { background: color-mix(in srgb, var(--blocker) 9%, transparent); }
+
+/* ---- diagrams ---- */
+
+figure.diagram {
+	margin: 1.75rem 0;
+	padding: 1.25rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--surface);
+	text-align: center;
+	overflow-x: auto;
+}
+figure.diagram figcaption {
+	margin-bottom: 0.75rem;
+	font-size: 0.78rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	font-weight: 700;
+	color: var(--muted);
+	text-align: left;
+}
+/* Before mermaid runs, and if it never loads, the source stays visible here
+   rather than the block vanishing. */
+figure.diagram .mermaid {
+	margin: 0;
+	text-align: left;
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+	font-size: 0.82rem;
+	color: var(--muted);
+	white-space: pre-wrap;
+}
+figure.diagram .mermaid[data-processed] { text-align: center; }
+figure.diagram svg { max-width: 100%; height: auto; }
+
+/* ---- decide blocks ---- */
+
+.decide {
+	margin: 2rem 0;
+	padding: 1.25rem 1.35rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--surface);
+	scroll-margin-top: 1rem;
+}
+.decide.answered { border-color: var(--done); }
+
+.decide-meta {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	margin-bottom: 0.5rem;
+	font-size: 0.78rem;
+}
+.chip {
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	font-weight: 700;
+	padding: 0.15rem 0.5rem;
+	border-radius: 999px;
+	background: var(--accent-soft);
+	color: var(--accent);
+}
+.chip[data-severity="blocker"] { background: var(--blocker-soft); color: var(--blocker); }
+.chip[data-severity="nitpick"] { background: var(--nitpick-soft); color: var(--nitpick); }
+/* pr-fix classifies items as easy or complex rather than blocker or nitpick. */
+.chip[data-severity="easy"] { background: color-mix(in srgb, var(--done) 14%, var(--surface)); color: var(--done); }
+.chip[data-severity="complex"] { background: var(--nitpick-soft); color: var(--nitpick); }
+/* Verdict badges, used on group headers and cards in PR dashboards. Keep the
+   success fill opaque so a themed card or summary cannot show through it. */
+.chip[data-severity="approve"] { background: color-mix(in srgb, var(--done) 14%, var(--surface)); color: var(--done); }
+.chip[data-severity="hold"] { background: var(--blocker-soft); color: var(--blocker); }
+.chip[data-severity="draft"] { background: var(--surface); color: var(--muted); }
+.where {
+	color: var(--muted);
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.decide h2 { margin: 0 0 0.5rem; font-size: 1.1rem; line-height: 1.35; }
+.decide .body { margin-bottom: 1rem; }
+.decide .body > :first-child { margin-top: 0; }
+.decide .body > :last-child { margin-bottom: 0; }
+
+.options { display: flex; flex-direction: column; gap: 0.5rem; }
+.option {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.65rem;
+	padding: 0.6rem 0.8rem;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	background: var(--bg);
+	cursor: pointer;
+	transition: border-color 0.12s, background 0.12s;
+}
+.option:hover { border-color: var(--accent); }
+.option input { margin: 0.35rem 0 0; accent-color: var(--accent); }
+.option.selected { border-color: var(--accent); background: var(--accent-soft); }
+.option .rec {
+	margin-left: auto;
+	font-size: 0.72rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--accent);
+	font-weight: 700;
+	white-space: nowrap;
+}
+.option textarea {
+	width: 100%;
+	min-height: 4.5rem;
+	margin-top: 0.5rem;
+	padding: 0.5rem 0.6rem;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background: var(--bg);
+	color: var(--text);
+	font: inherit;
+	font-size: 0.95rem;
+	resize: vertical;
+}
+.option .fill { flex: 1; }
+
+/* ---- additional context box ---- */
+
+.note { display: block; margin-top: 0.75rem; }
+.note-label {
+	display: block;
+	margin-bottom: 0.3rem;
+	font-size: 0.8rem;
+	color: var(--muted);
+}
+.note-label .opt {
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	opacity: 0.7;
+}
+.note textarea {
+	width: 100%;
+	min-height: 3rem;
+	padding: 0.5rem 0.6rem;
+	border: 1px dashed var(--border);
+	border-radius: 6px;
+	background: var(--bg);
+	color: var(--text);
+	font: inherit;
+	font-size: 0.95rem;
+	resize: vertical;
+}
+.note textarea:focus { border-style: solid; border-color: var(--accent); }
+
+/* ---- footer bar ---- */
+
+.bar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: var(--bg);
+	border-top: 1px solid var(--border);
+	padding: 0.85rem 1.5rem;
+}
+.bar-inner {
+	max-width: var(--measure);
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+.progress { color: var(--muted); font-size: 0.9rem; }
+.progress strong { color: var(--text); }
+.footer-spacer { flex: 1; }
+.theme-control {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	color: var(--muted);
+	font-size: 0.82rem;
+	font-weight: 600;
+}
+.theme-control select {
+	padding: 0.45rem 1.8rem 0.45rem 0.6rem;
+	border: 1px solid var(--border);
+	border-radius: 7px;
+	background: var(--surface);
+	color: var(--text);
+	font: inherit;
+	cursor: pointer;
+}
+.theme-control select:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+button {
+	margin-left: 0;
+	padding: 0.55rem 1.1rem;
+	border: 0;
+	border-radius: 8px;
+	background: var(--accent);
+	color: var(--accent-text);
+	font: inherit;
+	font-weight: 600;
+	font-size: 0.95rem;
+	cursor: pointer;
+}
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+button.secondary { background: transparent; color: var(--accent); border: 1px solid var(--border); margin-left: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+	.theme-ready body,
+	.theme-ready .bar,
+	.theme-ready .card,
+	.theme-ready details,
+	.theme-ready summary,
+	.theme-ready figure.diagram,
+	.theme-ready .decide,
+	.theme-ready .option,
+	.theme-ready textarea,
+	.theme-ready button,
+	.theme-ready select,
+	.theme-ready .chip {
+		transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+	}
+}
+
+@media (max-width: 600px) {
+	body { padding-bottom: 14rem; }
+	.bar { padding: 0.7rem 1rem; }
+	.bar-inner { flex-wrap: wrap; gap: 0.65rem; }
+	.progress { flex: 1 0 100%; }
+	.footer-spacer { display: none; }
+	.theme-control { margin-left: auto; }
+}
+
+@media print {
+	body { padding-bottom: 0; }
+	.bar { display: none; }
+}
+
+.done-screen { text-align: center; padding: 5rem 1rem; color: var(--muted); }
+.done-screen h1 { color: var(--text); font-size: 1.3rem; }
