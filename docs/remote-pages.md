@@ -34,7 +34,7 @@ You can edit the file directly. Environment variables take precedence when
 both are set:
 
 ```bash
-export VIZ_SERVER_URL=http://127.0.0.1:5008
+export VIZ_SERVER_URL=http://127.0.0.1:8080
 export VIZ_TOKEN=shared-secret
 ```
 
