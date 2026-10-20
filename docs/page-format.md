@@ -6,9 +6,16 @@ Every page has a title, an optional subtitle, and a list of blocks:
 {
   "title": "PR #412 — Retry handling",
   "subtitle": "optional line under the title",
+  "checklist": true,
   "blocks": []
 }
 ```
+
+Set the optional top-level `checklist` boolean to `true` to add checkboxes to
+card items and group headers. Checking one dims it and strikes its label. The
+state lasts only while the page remains open; reloading resets every checkbox.
+Checked groups are also skipped by **Show next unanswered**. Pages without the
+flag render without checklist controls.
 
 ## `md`
 
@@ -106,7 +113,7 @@ Wide tables scroll horizontally on narrow screens.
 
 ## `decide`
 
-Ask a question. This is the only interactive block.
+Ask a question and return the selected answer to the calling command.
 
 ```json
 {
@@ -161,7 +168,8 @@ Only `title` is required. The standard badge values are `blocker`, `nitpick`,
 `easy`, `complex`, `approve`, `hold`, and `draft`. Other values use the accent
 color. A card with a safe `href` opens its link in a new tab. Card and group
 links use the same allowed destinations as Markdown links; unsafe optional links
-are omitted without hiding the block contents.
+are omitted without hiding the block contents. When the page enables
+`checklist`, each card item includes a session-only checkbox.
 
 ## `group`
 
@@ -181,5 +189,6 @@ Wrap blocks in a collapsible section.
 
 - `blocks` accepts any block except another `group`.
 - `open` defaults to `true`.
-- **Show next unanswered** finds and opens collapsed groups that contain pending questions.
+- When the page enables `checklist`, each group header includes a session-only checkbox.
+- **Show next unanswered** finds and opens collapsed, unchecked groups that contain pending questions.
 - References, decisions, and `--echo` work normally inside groups.

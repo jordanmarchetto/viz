@@ -116,6 +116,7 @@ test("lists themes and applies flag, environment, and configured choices", async
   assert.match(listed.stdout, /^storybook\tsystem\t/m);
   assert.match(listed.stdout, /^unicorn\tsystem\t/m);
   assert.match(listed.stdout, /^arcade\tsystem\t/m);
+  assert.match(listed.stdout, /^pokemon\tsystem\t/m);
   assert.match(listed.stdout, /^rainbow\tindependent\t/m);
   assert.match(listed.stdout, /^zine\tindependent\t/m);
   assert.match(listed.stdout, /^high-fantasy\tindependent\t/m);

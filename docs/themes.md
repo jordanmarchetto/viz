@@ -13,6 +13,7 @@ decoration.
 | `storybook` | Follows the system | Warm paper, violet ink, and a little narrative sparkle |
 | `unicorn` | Follows the system | Pastel rainbows, candy-colored cards, and one tiny unicorn |
 | `arcade` | Follows the system | A neon cabinet for shipping software at high score |
+| `pokemon` | Follows the system | A bright trainer interface with Poké Ball panels and electric accents |
 | `rainbow` | Independent | Bold color fields that give every content block its own stage |
 | `zine` | Independent | Photocopied punk collage with fluorescent cut-paper blocks |
 | `high-fantasy` | Independent | An emerald road through old maps, golden halls, and cheerful quests |
@@ -42,6 +43,7 @@ Select a theme for one invocation:
 viz --theme storybook --open < examples/theme-showcase.json
 viz --theme unicorn --open < examples/theme-showcase.json
 viz --theme arcade --open < examples/theme-showcase.json
+viz --theme pokemon --open < examples/theme-showcase.json
 viz --theme rainbow --open < examples/theme-showcase.json
 viz --theme zine --open < examples/theme-showcase.json
 viz --theme high-fantasy --open < examples/theme-showcase.json
@@ -167,6 +169,11 @@ network request.
 
 ![Arcade light](images/theme-arcade.png)
 ![Arcade dark](images/theme-arcade-dark.png)
+
+### Pokémon
+
+Use `viz --theme pokemon --open < examples/theme-showcase.json` to preview its
+light or dark appearance.
 
 ### Rainbow
 

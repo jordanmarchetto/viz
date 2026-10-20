@@ -159,12 +159,22 @@ function renderTable(block: TableBlock): string {
 </figure>`;
 }
 
-function renderCards(block: CardsBlock): string {
+function checklistToggle(label: string): string {
+	return `<input class="checklist-toggle" type="checkbox" aria-label="Mark ${esc(label)} done">`;
+}
+
+function renderCards(block: CardsBlock, checklist: boolean): string {
 	const items = block.items
 		.map((item) => {
 			const inner = `${item.badge ? chip(item.badge) : ""}
     <span class="card-title">${esc(item.title)}</span>
     ${item.meta ? `<span class="card-meta">${esc(item.meta)}</span>` : ""}`;
+			if (checklist) {
+				const content = item.href && isSafeUrl(item.href)
+					? `<a class="card-content" href="${esc(item.href)}" target="_blank" rel="noopener noreferrer">${inner}</a>`
+					: `<span class="card-content">${inner}</span>`;
+				return `<div class="card checklist-item">${checklistToggle(item.title)}${content}</div>`;
+			}
 			// An <a> only when there is somewhere to go, so a plain card does not
 			// advertise a click that does nothing.
 			return item.href && isSafeUrl(item.href)
@@ -176,8 +186,8 @@ function renderCards(block: CardsBlock): string {
 	return `<div class="cards">\n${items}\n</div>`;
 }
 
-function renderGroup(block: GroupBlock, refs: RefMap): string {
-	const body = block.blocks.map((child) => renderBlock(child, refs)).join("\n");
+function renderGroup(block: GroupBlock, refs: RefMap, checklist: boolean): string {
+	const body = block.blocks.map((child) => renderBlock(child, refs, checklist)).join("\n");
 	// `open` is an HTML boolean attribute: present means expanded. Default to
 	// expanded, so a group only hides content when the page asked it to.
 	const open = block.open === false ? "" : " open";
@@ -185,8 +195,9 @@ function renderGroup(block: GroupBlock, refs: RefMap): string {
 		? `<a class="group-link" href="${esc(block.href)}" target="_blank" rel="noopener noreferrer">open \u2197</a>`
 		: "";
 
-	return `<details class="group"${open}>
+	return `<details class="group${checklist ? " checklist-item" : ""}"${open}>
   <summary>
+    ${checklist ? checklistToggle(block.label) : ""}
     <span class="group-head">
       <span class="group-label">${esc(block.label)}</span>
       ${block.badge ? chip(block.badge) : ""}
@@ -266,7 +277,7 @@ function renderDiagram(block: DiagramBlock): string {
 </figure>`;
 }
 
-function renderBlock(block: Block, refs: RefMap): string {
+function renderBlock(block: Block, refs: RefMap, checklist = false): string {
 	switch (block.type) {
 		case "md":
 			return `<div class="md">${md(block.text)}</div>`;
@@ -279,9 +290,9 @@ function renderBlock(block: Block, refs: RefMap): string {
 		case "decide":
 			return renderDecide(block);
 		case "cards":
-			return renderCards(block);
+			return renderCards(block, checklist);
 		case "group":
-			return renderGroup(block, refs);
+			return renderGroup(block, refs, checklist);
 	}
 }
 
@@ -314,7 +325,7 @@ export async function renderPage(page: Page, options: RenderOptions): Promise<st
 	]);
 
 	const refs = options.refs ?? new Map<RefBlock, string>();
-	const renderedBlocks = page.blocks.map((block) => renderBlock(block, refs));
+	const renderedBlocks = page.blocks.map((block) => renderBlock(block, refs, page.checklist === true));
 	const artSlot = '<span class="theme-art content-art" aria-hidden="true"></span>';
 	renderedBlocks.splice(Math.ceil(renderedBlocks.length / 2), 0, artSlot);
 	const body = renderedBlocks.join("\n");
@@ -346,6 +357,7 @@ export async function renderPage(page: Page, options: RenderOptions): Promise<st
 
 	const data = {
 		mode: options.mode,
+		...(page.checklist ? { checklist: true } : {}),
 		submitUrl: options.submitUrl ?? null,
 		decideIds,
 		theme: theme.name,

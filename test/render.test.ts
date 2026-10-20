@@ -107,6 +107,33 @@ describe("safe page rendering", () => {
     assert.match(html, /Group contents/);
   });
 
+  test("only renders card and group checkboxes when checklist mode is on", async () => {
+    const blocks: Page["blocks"] = [
+      {
+        type: "cards",
+        items: [{ title: "Linked card", href: "https://example.test/card" }, { title: "Plain card" }],
+      },
+      {
+        type: "group",
+        label: "Details",
+        blocks: [{ type: "decide", id: "q1", title: "Choose", options: ["A"] }],
+      },
+    ];
+    const withoutFlag = await renderPage({ title: "No checklist", blocks }, { mode: "detached" });
+    const explicitlyOff = await renderPage({ title: "No checklist", checklist: false, blocks }, { mode: "detached" });
+    const withFlag = await renderPage({ title: "Checklist", checklist: true, blocks }, { mode: "detached" });
+
+    assert.equal(withoutFlag, explicitlyOff);
+    assert.doesNotMatch(withoutFlag, /<input class="checklist-toggle" type="checkbox"/);
+    assert.equal(withFlag.match(/<input class="checklist-toggle" type="checkbox"/g)?.length, 3);
+    assert.match(withFlag, /<details class="group checklist-item" open>/);
+    assert.match(withFlag, /<div class="card checklist-item"><input/);
+    assert.match(withFlag, /<a class="card-content" href="https:\/\/example\.test\/card"/);
+    assert.match(withFlag, /"checklist":true/);
+    assert.match(withFlag, /event\.stopPropagation\(\)/);
+    assert.match(withFlag, /!card\.closest\("\.group\.done"\)/);
+  });
+
   test("embeds every theme and renders the switcher on display-only pages", async () => {
     const html = await renderPage({
       title: "Themed",
@@ -118,6 +145,7 @@ describe("safe page rendering", () => {
     assert.match(html, /:root\[data-theme="storybook"\]/);
     assert.match(html, /:root\[data-theme="unicorn"\]/);
     assert.match(html, /:root\[data-theme="arcade"\]/);
+    assert.match(html, /:root\[data-theme="pokemon"\]/);
     assert.match(html, /:root\[data-theme="rainbow"\]/);
     assert.match(html, /:root\[data-theme="zine"\]/);
     assert.match(html, /:root\[data-theme="high-fantasy"\]/);
@@ -139,6 +167,8 @@ describe("safe page rendering", () => {
     assert.match(html, /<option value="storybook:dark">Storybook \[dark\]<\/option>/);
     assert.match(html, /<option value="arcade:light">Arcade \[light\]<\/option>/);
     assert.match(html, /<option value="arcade:dark">Arcade \[dark\]<\/option>/);
+    assert.match(html, /<option value="pokemon:light">Pokemon \[light\]<\/option>/);
+    assert.match(html, /<option value="pokemon:dark">Pokemon \[dark\]<\/option>/);
     assert.match(html, /<option value="rainbow:independent">Rainbow<\/option>/);
     assert.match(html, /<option value="zine:independent">Zine<\/option>/);
     assert.match(html, /<option value="high-fantasy:independent">High Fantasy<\/option>/);
@@ -167,8 +197,8 @@ describe("safe page rendering", () => {
       theme: resolveTheme("random_dark", () => 0.3),
     });
 
-    assert.match(html, /data-theme="storybook" data-theme-mode="dark"/);
-    assert.match(html, /<option value="storybook:dark" selected>Storybook \[dark\]<\/option>/);
+    assert.match(html, /data-theme="unicorn" data-theme-mode="dark"/);
+    assert.match(html, /<option value="unicorn:dark" selected>Unicorn \[dark\]<\/option>/);
   });
 
   test("places the theme selector before decision actions", async () => {

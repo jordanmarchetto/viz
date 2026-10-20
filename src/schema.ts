@@ -94,6 +94,8 @@ export type Block = MdBlock | RefBlock | DecideBlock | DiagramBlock | TableBlock
 export interface Page {
 	title: string;
 	subtitle?: string;
+	/** Let readers mark cards and groups done until the page reloads. */
+	checklist?: boolean;
 	blocks: Block[];
 }
 
@@ -266,6 +268,10 @@ export function validatePage(raw: unknown): Page {
 		fail("blocks", "expected a non-empty array");
 	}
 
+	if (page.checklist !== undefined && typeof page.checklist !== "boolean") {
+		fail("checklist", "expected a boolean");
+	}
+
 	const blocks = page.blocks.map((block, i) => validateBlock(block, `blocks[${i}]`));
 
 	const ids = flatten(blocks)
@@ -279,6 +285,7 @@ export function validatePage(raw: unknown): Page {
 	return {
 		title: requireString(page.title, "title"),
 		subtitle: page.subtitle === undefined ? undefined : requireString(page.subtitle, "subtitle"),
+		checklist: page.checklist as boolean | undefined,
 		blocks,
 	};
 }

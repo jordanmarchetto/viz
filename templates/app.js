@@ -4,7 +4,7 @@
    window.VIZ is injected by render.ts and holds page, decision, and theme data. */
 
 (function () {
-	const { mode, submitUrl, decideIds, theme, themeMode, themes } = window.VIZ;
+	const { mode, submitUrl, decideIds, checklist, theme, themeMode, themes } = window.VIZ;
 	const answers = {};
 
 	const bar = document.querySelector(".bar-inner");
@@ -103,6 +103,19 @@
 	});
 	requestAnimationFrame(() => document.documentElement.classList.add("theme-ready"));
 
+	if (checklist) {
+		Array.from(document.querySelectorAll(".checklist-toggle")).forEach((checkbox) => {
+			checkbox.addEventListener("click", (event) => {
+				// Do not let a checkbox click reach its <summary>, whose default
+				// action would also expand or collapse the group.
+				event.stopPropagation();
+			});
+			checkbox.addEventListener("change", () => {
+				checkbox.closest(".checklist-item").classList.toggle("done", checkbox.checked);
+			});
+		});
+	}
+
 	function refresh() {
 		if (!progress || !submitBtn) return;
 		const done = Object.keys(answers).length;
@@ -126,7 +139,7 @@
 	   walk upward until there are none left. */
 	function revealNext() {
 		const pending = Array.from(document.querySelectorAll(".decide")).find(
-			(card) => !answers[card.dataset.id],
+			(card) => !answers[card.dataset.id] && !card.closest(".group.done"),
 		);
 		if (!pending) return;
 

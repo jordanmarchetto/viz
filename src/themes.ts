@@ -49,6 +49,14 @@ export const THEMES: readonly Theme[] = [
 		stylesheet: "arcade.css",
 	},
 	{
+		name: "pokemon",
+		description: "A bright trainer interface with Poké Ball panels and electric accents",
+		colorMode: "system",
+		appearances: ["light", "dark"],
+		mermaidTheme: "system",
+		stylesheet: "pokemon.css",
+	},
+	{
 		name: "rainbow",
 		description: "Bold color fields that give every content block its own stage",
 		colorMode: "independent",

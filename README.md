@@ -66,7 +66,8 @@ decision. It accepts normal options, such as `viz test --theme random_dark`.
 ## Add some whimsy with themes
 
 Keep the original focused design with `classic`, or switch to the warm
-`storybook`, pastel-rainbow `unicorn`, neon `arcade`, full-spectrum `rainbow`,
+`storybook`, pastel-rainbow `unicorn`, neon `arcade`, Poké Ball-inspired
+`pokemon`, full-spectrum `rainbow`,
 photocopied-punk `zine`, storybook `high-fantasy`, ink-and-parchment
 `adventurer-handbook`, gothic `inferno`, grim `dark-cathedral`, muddy fairy-tale
 `swamp`, tactical `space-command`, hopeful `light-side`, or severe `dark-side` themes. Themes can follow the system,
@@ -75,6 +76,7 @@ provide fixed light or dark appearances, or define an independent visual world:
 ```bash
 viz --theme unicorn --detach --open < examples/theme-showcase.json
 viz --theme arcade --detach --open < examples/theme-showcase.json
+viz --theme pokemon --detach --open < examples/theme-showcase.json
 viz --theme rainbow --detach --open < examples/theme-showcase.json
 viz --theme zine --detach --open < examples/theme-showcase.json
 viz --theme high-fantasy --detach --open < examples/theme-showcase.json
@@ -145,6 +147,15 @@ Use `--detach` or `--wait` to override the inferred mode. A detached page with
 decisions provides a **Copy answers** button instead of submitting them. After
 you answer at least one decision, you can submit or copy that partial set without
 answering every block.
+
+## Track dashboard progress
+
+Set `"checklist": true` at the top level of a page to add checkboxes to every
+card item and group header. Checked items remain visible but recede, and checked
+groups are skipped by **Show next unanswered**. Checklist state is temporary;
+reloading the page resets it.
+
+See the [page format reference](docs/page-format.md) for an example.
 
 ## Use viz across machines
 
