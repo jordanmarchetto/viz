@@ -268,14 +268,27 @@ figure.diagram {
 	text-align: center;
 	overflow-x: auto;
 }
-figure.diagram figcaption {
+.diagram-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	min-height: 1.9rem;
 	margin-bottom: 0.75rem;
+}
+figure.diagram figcaption {
+	margin: 0;
 	font-size: 0.78rem;
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
 	font-weight: 700;
 	color: var(--muted);
 	text-align: left;
+}
+.diagram-open {
+	flex: 0 0 auto;
+	padding: 0.35rem 0.7rem;
+	font-size: 0.78rem;
 }
 /* Before mermaid runs, and if it never loads, the source stays visible here
    rather than the block vanishing. */
@@ -288,7 +301,82 @@ figure.diagram .mermaid {
 	white-space: pre-wrap;
 }
 figure.diagram .mermaid[data-processed] { text-align: center; }
+figure.diagram .diagram-preview-ready { cursor: zoom-in; }
 figure.diagram svg { max-width: 100%; height: auto; }
+
+/* The viewer temporarily moves the rendered Mermaid node into a modal instead
+   of cloning it. SVG fragment IDs then remain unique and arrowheads still work. */
+.diagram-viewer {
+	width: 100vw;
+	max-width: none;
+	height: 100vh;
+	height: 100dvh;
+	max-height: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: var(--bg);
+	color: var(--text);
+}
+.diagram-viewer::backdrop { background: rgb(0 0 0 / 0.72); }
+.diagram-viewer-bar {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	height: 3.75rem;
+	padding: 0.6rem 0.85rem;
+	border-bottom: 1px solid var(--border);
+	background: var(--surface);
+}
+.diagram-viewer-title {
+	min-width: 0;
+	margin-right: auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.diagram-zoom {
+	width: 4rem;
+	color: var(--muted);
+	font-size: 0.82rem;
+	font-variant-numeric: tabular-nums;
+	text-align: right;
+}
+.diagram-viewer-bar button {
+	padding: 0.4rem 0.75rem;
+	border: 1px solid var(--border);
+	background: var(--bg);
+	color: var(--text);
+	font-size: 0.85rem;
+}
+.diagram-viewer-bar button:hover { border-color: var(--accent); }
+.diagram-viewport {
+	position: relative;
+	height: calc(100% - 3.75rem);
+	overflow: hidden;
+	background: var(--bg);
+	cursor: grab;
+	touch-action: none;
+	user-select: none;
+}
+.diagram-viewport:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.diagram-viewport.dragging { cursor: grabbing; }
+.diagram-canvas,
+.diagram-canvas .mermaid {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+.diagram-canvas svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	transform-origin: 0 0;
+	will-change: transform;
+}
 
 /* ---- decide blocks ---- */
 

@@ -85,6 +85,10 @@ Useful diagram types include `sequenceDiagram` for calls across services,
 `flowchart` for decision paths, `stateDiagram-v2` for lifecycles, and
 `erDiagram` for schemas.
 
+Click a rendered diagram or its **Expand** button to open the full-screen viewer.
+Drag to pan, use the mouse wheel or the **+** and **−** controls to zoom, and use
+**Fit** to reset the diagram to the available space. Press Escape to close it.
+
 Mermaid loads from a CDN to avoid adding several megabytes to every page. A page
 with a diagram needs network access the first time it opens. If Mermaid cannot
 load, the diagram source remains visible as text. Pages without diagrams work

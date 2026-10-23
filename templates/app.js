@@ -17,6 +17,7 @@
 	let activeMode = document.documentElement.dataset.themeMode;
 	let followsSystem = themeMode === "system";
 	let mermaidQueue = Promise.resolve();
+	let diagramViewer = null;
 
 	function themeMetadata(name) {
 		return themes.find((candidate) => candidate.name === name);
@@ -41,7 +42,170 @@
 		return configured;
 	}
 
+	function createDiagramViewer() {
+		const figures = Array.from(document.querySelectorAll("figure.diagram"));
+		if (figures.length === 0) return null;
+
+		const dialog = document.createElement("dialog");
+		dialog.className = "diagram-viewer";
+		dialog.setAttribute("aria-label", "Diagram viewer");
+		dialog.innerHTML = `<div class="diagram-viewer-bar">
+			<strong class="diagram-viewer-title">Diagram</strong>
+			<span class="diagram-zoom" aria-live="polite">100%</span>
+			<button type="button" data-action="out" aria-label="Zoom out">−</button>
+			<button type="button" data-action="fit">Fit</button>
+			<button type="button" data-action="in" aria-label="Zoom in">+</button>
+			<button type="button" data-action="close" aria-label="Close diagram viewer">Close</button>
+		</div>
+		<div class="diagram-viewport" tabindex="0" aria-label="Zoomable diagram. Drag to pan; use plus and minus keys to zoom.">
+			<div class="diagram-canvas"></div>
+		</div>`;
+		document.body.append(dialog);
+
+		const title = dialog.querySelector(".diagram-viewer-title");
+		const zoomLabel = dialog.querySelector(".diagram-zoom");
+		const viewport = dialog.querySelector(".diagram-viewport");
+		const canvas = dialog.querySelector(".diagram-canvas");
+		let origin = null;
+		let svg = null;
+		let originalStyle = null;
+		let width = 1;
+		let height = 1;
+		let scale = 1;
+		let x = 0;
+		let y = 0;
+		let drag = null;
+
+		function paint() {
+			if (!svg) return;
+			svg.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+			zoomLabel.textContent = `${Math.round(scale * 100)}%`;
+		}
+
+		function fit() {
+			if (!svg) return;
+			const padding = 48;
+			scale = Math.min((viewport.clientWidth - padding) / width, (viewport.clientHeight - padding) / height);
+			scale = Math.max(0.02, Math.min(8, scale));
+			x = (viewport.clientWidth - width * scale) / 2;
+			y = (viewport.clientHeight - height * scale) / 2;
+			paint();
+		}
+
+		function zoomAt(factor, clientX, clientY) {
+			if (!svg) return;
+			const rect = viewport.getBoundingClientRect();
+			const pointX = clientX - rect.left;
+			const pointY = clientY - rect.top;
+			const next = Math.max(0.02, Math.min(8, scale * factor));
+			const ratio = next / scale;
+			x = pointX - (pointX - x) * ratio;
+			y = pointY - (pointY - y) * ratio;
+			scale = next;
+			paint();
+		}
+
+		function zoomFromCenter(factor) {
+			const rect = viewport.getBoundingClientRect();
+			zoomAt(factor, rect.left + rect.width / 2, rect.top + rect.height / 2);
+		}
+
+		function restore() {
+			if (!origin || !svg) return;
+			if (originalStyle === null) svg.removeAttribute("style");
+			else svg.setAttribute("style", originalStyle);
+			origin.parent.insertBefore(origin.node, origin.next);
+			canvas.replaceChildren();
+			origin = null;
+			svg = null;
+			drag = null;
+		}
+
+		function close() {
+			if (dialog.open) dialog.close();
+		}
+
+		function open(figure) {
+			const mermaid = figure.querySelector(".mermaid");
+			const rendered = mermaid && mermaid.querySelector("svg");
+			if (!rendered) return;
+
+			origin = { node: mermaid, parent: mermaid.parentNode, next: mermaid.nextSibling };
+			svg = rendered;
+			originalStyle = svg.getAttribute("style");
+			const box = svg.viewBox && svg.viewBox.baseVal;
+			width = Math.max(1, box && box.width ? box.width : svg.getBoundingClientRect().width);
+			height = Math.max(1, box && box.height ? box.height : svg.getBoundingClientRect().height);
+			svg.style.width = `${width}px`;
+			svg.style.height = `${height}px`;
+			svg.style.maxWidth = "none";
+			canvas.replaceChildren(mermaid);
+			title.textContent = figure.querySelector("figcaption")?.textContent || "Diagram";
+			dialog.showModal();
+			requestAnimationFrame(() => {
+				fit();
+				viewport.focus();
+			});
+		}
+
+		function prepare() {
+			for (const figure of figures) {
+				const mermaid = figure.querySelector(".mermaid");
+				const button = figure.querySelector(".diagram-open");
+				const ready = Boolean(mermaid && mermaid.querySelector("svg"));
+				button.hidden = !ready;
+				mermaid?.classList.toggle("diagram-preview-ready", ready);
+				if (figure.dataset.viewerWired) continue;
+				figure.dataset.viewerWired = "true";
+				button.addEventListener("click", () => open(figure));
+				mermaid.addEventListener("click", (event) => {
+					if (!event.target.closest("a")) open(figure);
+				});
+			}
+		}
+
+		dialog.querySelector('[data-action="close"]').addEventListener("click", close);
+		dialog.querySelector('[data-action="fit"]').addEventListener("click", fit);
+		dialog.querySelector('[data-action="in"]').addEventListener("click", () => zoomFromCenter(1.25));
+		dialog.querySelector('[data-action="out"]').addEventListener("click", () => zoomFromCenter(0.8));
+		dialog.addEventListener("close", restore);
+		viewport.addEventListener("dblclick", fit);
+		viewport.addEventListener("wheel", (event) => {
+			event.preventDefault();
+			zoomAt(Math.exp(-event.deltaY * 0.0015), event.clientX, event.clientY);
+		}, { passive: false });
+		viewport.addEventListener("pointerdown", (event) => {
+			drag = { pointerId: event.pointerId, clientX: event.clientX, clientY: event.clientY, x, y };
+			viewport.setPointerCapture(event.pointerId);
+			viewport.classList.add("dragging");
+		});
+		viewport.addEventListener("pointermove", (event) => {
+			if (!drag || drag.pointerId !== event.pointerId) return;
+			x = drag.x + event.clientX - drag.clientX;
+			y = drag.y + event.clientY - drag.clientY;
+			paint();
+		});
+		function endDrag(event) {
+			if (!drag || drag.pointerId !== event.pointerId) return;
+			drag = null;
+			viewport.classList.remove("dragging");
+		}
+		viewport.addEventListener("pointerup", endDrag);
+		viewport.addEventListener("pointercancel", endDrag);
+		viewport.addEventListener("keydown", (event) => {
+			if (event.key === "+" || event.key === "=") zoomFromCenter(1.25);
+			else if (event.key === "-") zoomFromCenter(0.8);
+			else if (event.key === "0" || event.key.toLowerCase() === "f") fit();
+			else return;
+			event.preventDefault();
+		});
+
+		prepare();
+		return { close, prepare };
+	}
+
 	async function redrawMermaid(name) {
+		diagramViewer?.close();
 		const mermaid = window.VIZ_MERMAID;
 		const nodes = Array.from(document.querySelectorAll(".mermaid"));
 		if (!mermaid || nodes.length === 0) return;
@@ -58,6 +222,7 @@
 				node.textContent = node.dataset.source;
 			}
 			await mermaid.run({ nodes });
+			diagramViewer?.prepare();
 		} catch (_error) {
 			// A theme change should never destroy a diagram that was already useful.
 			for (const snapshot of snapshots) {
@@ -80,6 +245,8 @@
 		themeSelect.value = `${name}:${mode}`;
 		queueMermaidRedraw();
 	}
+
+	diagramViewer = createDiagramViewer();
 
 	themeSelect.value = `${activeTheme}:${activeMode}`;
 	themeSelect.addEventListener("change", () => {

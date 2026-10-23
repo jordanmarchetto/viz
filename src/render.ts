@@ -271,8 +271,12 @@ window.dispatchEvent(new Event("viz:mermaid-ready"));
 </script>`;
 
 function renderDiagram(block: DiagramBlock): string {
+	const viewerLabel = block.label ? `Open ${block.label} in diagram viewer` : "Open diagram viewer";
 	return `<figure class="diagram">
-  ${block.label ? `<figcaption>${esc(block.label)}</figcaption>` : ""}
+  <div class="diagram-heading">
+    ${block.label ? `<figcaption>${esc(block.label)}</figcaption>` : '<span aria-hidden="true"></span>'}
+    <button class="diagram-open" type="button" aria-label="${esc(viewerLabel)}" hidden>Expand</button>
+  </div>
   <pre class="mermaid" data-source="${esc(block.text)}">${esc(block.text)}</pre>
 </figure>`;
 }

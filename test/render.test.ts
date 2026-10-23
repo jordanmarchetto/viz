@@ -191,6 +191,18 @@ describe("safe page rendering", () => {
     assert.doesNotMatch(html, /<button class="primary">/);
   });
 
+  test("adds an interactive viewer to rendered Mermaid diagrams", async () => {
+    const html = await render([{ type: "diagram", label: "Service map", text: "flowchart LR\n  A-->B" }]);
+
+    assert.match(html, /<button class="diagram-open"[^>]*aria-label="Open Service map in diagram viewer" hidden>Expand<\/button>/);
+    assert.match(html, /dialog\.className = "diagram-viewer"/);
+    assert.match(html, /data-action="fit"/);
+    assert.match(html, /viewport\.addEventListener\("wheel"/);
+    assert.match(html, /viewport\.addEventListener\("pointermove"/);
+    assert.match(html, /viewport\.addEventListener\("keydown"/);
+    assert.match(html, /origin\.parent\.insertBefore\(origin\.node, origin\.next\)/);
+  });
+
   test("selects a forced random appearance before client JavaScript runs", async () => {
     const html = await renderPage({ title: "Forced", blocks: [] }, {
       mode: "detached",
